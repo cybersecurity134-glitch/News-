@@ -1,0 +1,25 @@
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+@import "./tokens.css";
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-stack);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ios-card {
+  background: var(--color-card-bg);
+  border-radius: var(--radius-card);
+  padding: var(--space-card-padding);
+}
+
+.ios-separator {
+  height: 1px;
+  background-color: var(--color-separator);
+}

@@ -1,0 +1,264 @@
+{
+  "users": [
+    {
+      "id": "user-admin-cybersecurity134",
+      "email": "cybersecurity134@gmail.com",
+      "name": "Cybersecurity Administrator",
+      "phone": "+1 (555) 019-2834",
+      "role": "admin",
+      "status": "active",
+      "passwordHash": "886787d25751184001738eddb9a2c9c5a11c79bc40329786b8cf384f6e5913383e9f9040332926a7ef4ff792fa8d6695227ca8a9a3a0e49032357720637f8cc4",
+      "salt": "ce37ba7eaccca2e8eb406783f38fb5c5",
+      "createdAt": "2026-01-01T00:00:00.000Z",
+      "updatedAt": "2026-09-23T16:15:15.777Z",
+      "lastLoginAt": "2026-09-23T16:15:15.777Z",
+      "loginCount": 15,
+      "failedLoginAttempts": 0,
+      "mfaEnabled": true
+    },
+    {
+      "id": "user-member-alex",
+      "email": "alex@foundercraft.xyz",
+      "name": "Alex Rivera",
+      "phone": "+1 (555) 234-5678",
+      "role": "member",
+      "status": "active",
+      "passwordHash": "2a6c1def9d4184c8e5069a55f083dbbb939fd4eab9c791141f19fccecccaf807cae5420b6c27f57757632f9f4eb9b6225eb77a3a9e8fc9997c7051f500140719",
+      "salt": "a15c56f24c927564a2d950d07f94559e",
+      "createdAt": "2026-02-10T11:20:00.000Z",
+      "updatedAt": "2026-02-10T11:20:00.000Z",
+      "lastLoginAt": "2026-09-23T08:15:00.000Z",
+      "loginCount": 28,
+      "failedLoginAttempts": 0
+    },
+    {
+      "id": "user-member-marcus",
+      "email": "marcus.chen@techscout.co",
+      "name": "Marcus Chen",
+      "phone": "+1 (555) 345-6789",
+      "role": "member",
+      "status": "active",
+      "passwordHash": "2a68b068dc8ce736d01035221e5d8ef1b2ea1f0493ebdf65fe026009b3fc5abf2f6f9cdf3f2bc8c6f21ec834ad63c5b18e5acf2dcdbbf677cac8a6c21ea3ced3",
+      "salt": "0af7ec91fc29de1bccefe06eef42e066",
+      "createdAt": "2026-02-15T09:40:00.000Z",
+      "updatedAt": "2026-02-15T09:40:00.000Z",
+      "lastLoginAt": "2026-09-23T07:45:00.000Z",
+      "loginCount": 19,
+      "failedLoginAttempts": 0
+    },
+    {
+      "id": "user-member-user2",
+      "email": "user2@example.com",
+      "name": "Jordan Sparks",
+      "phone": "+1 (555) 876-5432",
+      "role": "member",
+      "status": "blocked",
+      "passwordHash": "df3b2a234f733c7019090b14d3dc84be3b0bbbbae31ab54c6fb8c27fff272e1932e698932fab99d9deb674b8b93b3ddd45ed6c12db6b03eb9d5e9283f0802859",
+      "salt": "b295d1b927ab698f7fd28b7231b32f52",
+      "createdAt": "2026-03-01T14:00:00.000Z",
+      "updatedAt": "2026-03-01T14:00:00.000Z",
+      "lastLoginAt": "2026-09-18T16:30:00.000Z",
+      "loginCount": 6,
+      "failedLoginAttempts": 0
+    },
+    {
+      "id": "user-member-elena",
+      "email": "elena@novacapital.vc",
+      "name": "Elena Vance",
+      "phone": "+1 (555) 432-1098",
+      "role": "member",
+      "status": "pending",
+      "passwordHash": "fa669d73e53c7a54c9d04d0077f7d87913c54b649bd85a900fec57ac726d2385a07f4ed09ae8c36b76f8b7dbbf00ae89fb9629889b6989ee2d9f7d06edf5153d",
+      "salt": "5524c540b94844c748632f39eb70ebf7",
+      "createdAt": "2026-09-22T18:10:00.000Z",
+      "updatedAt": "2026-09-22T18:10:00.000Z",
+      "loginCount": 0,
+      "failedLoginAttempts": 0
+    },
+    {
+      "id": "user-member-david",
+      "email": "david.kim@quantumbit.io",
+      "name": "David Kim",
+      "phone": "+1 (555) 987-6543",
+      "role": "member",
+      "status": "suspended",
+      "passwordHash": "1fb19b4b7d899f79024bdd8aa08156523eae7bc801a1d1ab493ed9f2ed00b1243f258381a428d08148dde4c1fdcfe8b90bf49d12d087db49bd21c7a7d6c78d02",
+      "salt": "2dddd7d3f07a3fbcf8322977e4d002bf",
+      "createdAt": "2026-04-12T10:00:00.000Z",
+      "updatedAt": "2026-04-12T10:00:00.000Z",
+      "lastLoginAt": "2026-09-10T12:00:00.000Z",
+      "loginCount": 11,
+      "failedLoginAttempts": 0
+    },
+    {
+      "id": "usr_ee75175a7f533c9f0f00837c",
+      "email": "testmember@example.com",
+      "name": "Test Member",
+      "role": "member",
+      "status": "active",
+      "passwordHash": "793657de3d9d03adfcd8d5a7e858611f1cd6a1228f728b2961e967b83fe8d4661fdc34fd5276c84ff5b2c9e80077e1d594492388304f513ec331bf9af03cc474",
+      "salt": "b4e8320a2e2ca7488b5378526ebcce02",
+      "createdAt": "2026-09-23T16:15:09.932Z",
+      "updatedAt": "2026-09-23T16:15:38.365Z",
+      "lastLoginAt": "2026-09-23T16:15:40.569Z",
+      "loginCount": 1,
+      "failedLoginAttempts": 0
+    }
+  ],
+  "sessions": [
+    {
+      "id": "sess_88bdde5abf908ad8e288aa74cd69ff261f442dea0937bb33ff271bdbfedbc2f9",
+      "userId": "usr_ee75175a7f533c9f0f00837c",
+      "email": "testmember@example.com",
+      "role": "member",
+      "createdAt": "2026-09-23T16:15:09.932Z",
+      "lastActivityAt": "2026-09-23T16:15:13.257Z",
+      "expiresAt": "2026-09-24T16:15:09.932Z",
+      "ipOrUa": "curl/7.88.1",
+      "revokedAt": "2026-09-23T16:15:23.575Z"
+    },
+    {
+      "id": "sess_530ac890f9a778b1ecfe1c346323c9df7271800407878a5d5636863054372b1e",
+      "userId": "user-admin-cybersecurity134",
+      "email": "cybersecurity134@gmail.com",
+      "role": "admin",
+      "createdAt": "2026-09-23T16:15:15.778Z",
+      "lastActivityAt": "2026-09-23T16:15:54.864Z",
+      "expiresAt": "2026-09-24T16:15:15.778Z",
+      "ipOrUa": "curl/7.88.1"
+    },
+    {
+      "id": "sess_7639667978aa08e4d3cefab3784388fb99c2c8eaffb7ac6179fd8a4d3d463b1c",
+      "userId": "usr_ee75175a7f533c9f0f00837c",
+      "email": "testmember@example.com",
+      "role": "member",
+      "createdAt": "2026-09-23T16:15:40.569Z",
+      "lastActivityAt": "2026-09-23T16:15:40.569Z",
+      "expiresAt": "2026-09-24T16:15:40.569Z",
+      "ipOrUa": "curl/7.88.1"
+    }
+  ],
+  "auditLogs": [
+    {
+      "id": "log_ac431afdcaa46593",
+      "timestamp": "2026-09-23T16:15:54.865Z",
+      "adminUserId": "user-admin-cybersecurity134",
+      "adminEmail": "cybersecurity134@gmail.com",
+      "action": "UPDATE_SYSTEM_SETTINGS",
+      "metadata": {
+        "settings": {
+          "pauseRegistrations": false,
+          "disableMemberAccess": false,
+          "emergencyMessage": "Member access is temporarily suspended for system maintenance. Please check back shortly."
+        }
+      }
+    },
+    {
+      "id": "log_d66df11caa580c20",
+      "timestamp": "2026-09-23T16:15:47.812Z",
+      "adminUserId": "user-admin-cybersecurity134",
+      "adminEmail": "cybersecurity134@gmail.com",
+      "action": "UPDATE_SYSTEM_SETTINGS",
+      "metadata": {
+        "settings": {
+          "pauseRegistrations": false,
+          "disableMemberAccess": false,
+          "emergencyMessage": "Member access is temporarily suspended for system maintenance. Please check back shortly."
+        }
+      }
+    },
+    {
+      "id": "log_2824c1da6d39033a",
+      "timestamp": "2026-09-23T16:15:40.570Z",
+      "adminUserId": "usr_ee75175a7f533c9f0f00837c",
+      "adminEmail": "testmember@example.com",
+      "action": "LOGIN_SUCCESS",
+      "metadata": {
+        "ip": "127.0.0.1",
+        "role": "member"
+      }
+    },
+    {
+      "id": "log_2b3a018344d82587",
+      "timestamp": "2026-09-23T16:15:38.366Z",
+      "adminUserId": "user-admin-cybersecurity134",
+      "adminEmail": "cybersecurity134@gmail.com",
+      "action": "UNBLOCK_MEMBER",
+      "targetUserId": "usr_ee75175a7f533c9f0f00837c",
+      "targetEmail": "testmember@example.com"
+    },
+    {
+      "id": "log_306aca2c152fdb2f",
+      "timestamp": "2026-09-23T16:15:23.576Z",
+      "adminUserId": "user-admin-cybersecurity134",
+      "adminEmail": "cybersecurity134@gmail.com",
+      "action": "BLOCK_MEMBER",
+      "targetUserId": "usr_ee75175a7f533c9f0f00837c",
+      "targetEmail": "testmember@example.com",
+      "metadata": {
+        "revokedSessions": 1
+      }
+    },
+    {
+      "id": "log_9a03cbe0afb288a2",
+      "timestamp": "2026-09-23T16:15:15.778Z",
+      "adminUserId": "user-admin-cybersecurity134",
+      "adminEmail": "cybersecurity134@gmail.com",
+      "action": "LOGIN_SUCCESS",
+      "metadata": {
+        "ip": "127.0.0.1",
+        "role": "admin"
+      }
+    },
+    {
+      "id": "log_d0269b919ca8c9a7",
+      "timestamp": "2026-09-23T16:15:13.257Z",
+      "adminUserId": "usr_ee75175a7f533c9f0f00837c",
+      "adminEmail": "testmember@example.com",
+      "action": "UNAUTHORIZED_ADMIN_ATTEMPT",
+      "metadata": {
+        "path": "/api/admin/users",
+        "method": "GET"
+      }
+    },
+    {
+      "id": "log_f6899b6bb27b14eb",
+      "timestamp": "2026-09-23T16:15:09.933Z",
+      "adminUserId": "usr_ee75175a7f533c9f0f00837c",
+      "adminEmail": "testmember@example.com",
+      "action": "USER_REGISTERED",
+      "targetUserId": "usr_ee75175a7f533c9f0f00837c",
+      "targetEmail": "testmember@example.com",
+      "metadata": {
+        "role": "member"
+      }
+    },
+    {
+      "id": "audit-001",
+      "adminUserId": "user-admin-cybersecurity134",
+      "adminEmail": "cybersecurity134@gmail.com",
+      "action": "SYSTEM_INITIALIZATION",
+      "timestamp": "2026-09-23T16:14:59.179Z",
+      "metadata": {
+        "info": "Secure authentication and RBAC engine initialized"
+      }
+    },
+    {
+      "id": "audit-002",
+      "adminUserId": "user-admin-cybersecurity134",
+      "adminEmail": "cybersecurity134@gmail.com",
+      "action": "BLOCK_USER",
+      "targetUserId": "user-member-user2",
+      "targetEmail": "user2@example.com",
+      "timestamp": "2026-09-18T17:00:00.000Z",
+      "metadata": {
+        "reason": "Suspicious credential stuffing detected"
+      }
+    }
+  ],
+  "settings": {
+    "pauseRegistrations": false,
+    "disableMemberAccess": false,
+    "emergencyMessage": "Member access is temporarily suspended for system maintenance. Please check back shortly."
+  }
+}

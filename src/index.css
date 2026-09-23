@@ -1,0 +1,370 @@
+@import "tailwindcss";
+@import "./styles/tokens.css";
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+  }
+  html, body {
+    min-height: 100dvh;
+    overflow-x: hidden;
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    touch-action: manipulation;
+  }
+
+  /* Prevent auto zoom on iOS while retaining legibility */
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+  @media (min-width: 640px) {
+    input, select, textarea {
+      font-size: 0.9375rem !important;
+    }
+  }
+
+  /* Responsive media defaults */
+  img, video, canvas, svg {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Keyboard accessible focus rings */
+  :focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+  }
+}
+
+/* Safe area support for iOS / Android notches and gestures */
+.safe-top {
+  padding-top: max(env(safe-area-inset-top, 0px), 12px);
+}
+.safe-bottom {
+  padding-bottom: max(env(safe-area-inset-bottom, 0px), 16px);
+}
+
+/* Touch target minimum 44px for thumb & finger ergonomics */
+.tap-target-44 {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Fluid responsive typography */
+.text-fluid-title {
+  font-size: clamp(1.25rem, 2.5vw + 0.5rem, 2rem);
+  line-height: 1.2;
+}
+
+.text-fluid-subtitle {
+  font-size: clamp(0.75rem, 1vw + 0.45rem, 0.9375rem);
+  line-height: 1.5;
+}
+
+/* Landscape mode on small devices: ensure modals and sheets do not overflow */
+@media (max-height: 520px) {
+  .liquid-glass-modal {
+    max-height: 94dvh !important;
+  }
+}
+
+/* ==============================================================
+   CLASSIC PREMIUM GLASSMORPHISM & CARD SYSTEM
+   ============================================================== */
+
+/* Level 1: Ambient mesh canvas background */
+.ambient-glow-mesh {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  background-color: var(--color-bg);
+  contain: strict;
+  transform: translateZ(0);
+}
+
+.ambient-node {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(100px);
+  opacity: 0.6;
+  transition: opacity 600ms ease;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+[data-theme="dark"] .ambient-node {
+  opacity: 0.35;
+}
+
+/* Level 2: Glass Card (Refined, classic, readable, 144Hz smooth) */
+.liquid-glass-card {
+  background: var(--glass-card-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-card-border);
+  box-shadow: var(--glass-card-shadow), var(--glass-card-highlight);
+  border-radius: 16px;
+  transform: translateZ(0);
+  will-change: transform;
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 180ms ease,
+              background-color 180ms ease,
+              border-color 180ms ease;
+}
+
+.liquid-glass-card:hover {
+  background: var(--glass-card-hover-bg);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -4px rgba(15, 23, 42, 0.08), var(--glass-card-highlight);
+}
+
+[data-theme="dark"] .liquid-glass-card:hover {
+  box-shadow: 0 12px 28px -4px rgba(0, 0, 0, 0.5), var(--glass-card-highlight);
+}
+
+.liquid-glass-card:active {
+  transform: scale(0.99);
+}
+
+/* Level 3: Floating Nav & Bars */
+.liquid-glass-nav {
+  background: var(--glass-nav-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-nav-border);
+  box-shadow: var(--glass-nav-shadow);
+}
+
+/* Level 4: Sheets, Modals, Overlays */
+.liquid-glass-modal {
+  background: var(--glass-modal-bg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--glass-modal-border);
+  box-shadow: var(--glass-modal-shadow);
+}
+
+/* Level 5: Glass Controls & Inputs */
+.liquid-glass-input {
+  background: var(--glass-input-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-input-border);
+  color: var(--color-text-primary);
+  transition: all 180ms ease;
+}
+.liquid-glass-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-subtle);
+  outline: none;
+}
+
+/* Classic Button System */
+.btn-classic-primary {
+  background-color: var(--color-primary);
+  color: var(--color-primary-fg);
+  font-weight: 700;
+  transition: all 180ms cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 8px -1px var(--color-primary-glow);
+}
+.btn-classic-primary:hover:not(:disabled) {
+  background-color: var(--color-primary-hover);
+  box-shadow: 0 4px 14px -1px var(--color-primary-glow);
+  transform: translateY(-1px);
+}
+.btn-classic-primary:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.btn-classic-secondary {
+  background-color: var(--color-secondary-subtle);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+  font-weight: 600;
+  transition: all 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-classic-secondary:hover:not(:disabled) {
+  background-color: var(--color-border-subtle);
+  color: var(--color-text-primary);
+}
+.btn-classic-secondary:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+/* Section Specific Badges */
+.badge-section-news {
+  background-color: var(--sec-news-subtle);
+  color: var(--sec-news);
+  border: 1px solid var(--sec-news-border);
+}
+.badge-section-startups {
+  background-color: var(--sec-startups-subtle);
+  color: var(--sec-startups);
+  border: 1px solid var(--sec-startups-border);
+}
+.badge-section-funding {
+  background-color: var(--sec-funding-subtle);
+  color: var(--sec-funding);
+  border: 1px solid var(--sec-funding-border);
+}
+.badge-section-schemes {
+  background-color: var(--sec-schemes-subtle);
+  color: var(--sec-schemes);
+  border: 1px solid var(--sec-schemes-border);
+}
+.badge-section-investors {
+  background-color: var(--sec-investors-subtle);
+  color: var(--sec-investors);
+  border: 1px solid var(--sec-investors-border);
+}
+.badge-section-grants {
+  background-color: var(--sec-grants-subtle);
+  color: var(--sec-grants);
+  border: 1px solid var(--sec-grants-border);
+}
+.badge-section-events {
+  background-color: var(--sec-events-subtle);
+  color: var(--sec-events);
+  border: 1px solid var(--sec-events-border);
+}
+.badge-section-problems {
+  background-color: var(--sec-problems-subtle);
+  color: var(--sec-problems);
+  border: 1px solid var(--sec-problems-border);
+}
+
+/* Semantic Badges */
+.badge-success {
+  background-color: var(--color-success-bg);
+  color: var(--color-success);
+  border: 1px solid var(--color-success-border);
+}
+.badge-warning {
+  background-color: var(--color-warning-bg);
+  color: var(--color-warning);
+  border: 1px solid var(--color-warning-border);
+}
+.badge-error {
+  background-color: var(--color-error-bg);
+  color: var(--color-error);
+  border: 1px solid var(--color-error-border);
+}
+.badge-info {
+  background-color: var(--color-info-bg);
+  color: var(--color-info);
+  border: 1px solid var(--color-info-border);
+}
+
+/* Subtle Press State */
+.interactive-press {
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1), opacity 180ms ease;
+}
+.interactive-press:active {
+  transform: scale(0.97);
+  opacity: 0.94;
+}
+
+/* Specular reflection line */
+.specular-line {
+  position: relative;
+  overflow: hidden;
+}
+.specular-line::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  pointer-events: none;
+}
+
+
+/* Animations */
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.96) translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes pulseSubtle {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.75;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes floatAmbient {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  33% {
+    transform: translate(18px, -24px);
+  }
+  66% {
+    transform: translate(-14px, 16px);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeInScale 260ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-pulse-subtle {
+  animation: pulseSubtle 2.2s infinite ease-in-out;
+}
+
+.animate-float-slow {
+  animation: floatAmbient 18s infinite ease-in-out;
+}
+
+/* Custom scrollbars that feel like iOS */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.35);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.6);
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .liquid-glass-card:hover {
+    transform: none !important;
+  }
+  .interactive-press:active {
+    transform: none !important;
+  }
+  .animate-float-slow {
+    animation: none !important;
+  }
+}
