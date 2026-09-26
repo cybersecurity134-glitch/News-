@@ -201,7 +201,7 @@ export const CameraCaptureModal: React.FC<CameraCaptureModalProps> = ({
           {/* Permission Prompt Modal state */}
           {permissionState === 'prompt' && (
             <div className="p-6 text-center max-w-sm space-y-4">
-              <div className="w-16 h-16 mx-auto rounded-3xl bg-blue-500/20 text-[#0071E3] flex items-center justify-center border border-blue-500/30">
+              <div className="w-16 h-16 mx-auto rounded-3xl bg-[var(--color-primary-subtle)] text-[var(--color-primary)] flex items-center justify-center border border-[var(--color-primary-border)]">
                 <Shield className="w-8 h-8" />
               </div>
               <div>
@@ -219,7 +219,7 @@ export const CameraCaptureModal: React.FC<CameraCaptureModalProps> = ({
               <div className="pt-2 flex flex-col gap-2">
                 <button
                   onClick={handleGrantPermission}
-                  className="w-full py-3 rounded-2xl bg-gradient-to-r from-[#0071E3] to-[#34C759] text-white text-xs font-bold shadow-lg hover:brightness-110 active:scale-98 transition-all"
+                  className="w-full py-3 rounded-2xl bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-[var(--color-primary-fg)] text-xs font-bold shadow-lg active:scale-98 transition-all"
                 >
                   Allow Camera & Start Viewfinder
                 </button>

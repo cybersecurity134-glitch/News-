@@ -198,7 +198,7 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({ item, isDark, 
               </div>
 
               {item.automatedCheck.flagReasons.length > 0 && (
-                <div className="p-2.5 rounded bg-amber-500/10 text-amber-700 dark:text-amber-400 flex items-start gap-2">
+                <div className="p-2.5 rounded bg-[var(--color-warning-bg)] text-[var(--color-warning-fg)] flex items-start gap-2">
                   <AlertTriangle className="w-4 h-4 shrink-0 mt-0.5" />
                   <ul className="list-disc pl-3 space-y-0.5">
                     {item.automatedCheck.flagReasons.map((reason, idx) => (
@@ -211,7 +211,7 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({ item, isDark, 
           )}
 
           {item.moderationNotes && (
-            <div className="text-xs p-3 rounded-xl bg-blue-500/10 text-blue-700 dark:text-blue-300">
+            <div className="text-xs p-3 rounded-xl bg-[var(--color-info-bg)] text-[var(--color-info-fg)]">
               <span className="font-bold block mb-0.5">Editorial Note:</span>
               {item.moderationNotes}
             </div>

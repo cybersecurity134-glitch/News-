@@ -58,18 +58,18 @@ export const FilterBar: React.FC = memo(() => {
     <div className="liquid-glass-card p-4 space-y-3.5 select-none" role="region" aria-label="Intelligence Filters">
       {/* Category Pills Header */}
       <div className="flex items-center justify-between gap-2 border-b border-[var(--color-border-subtle)] pb-2.5">
-        <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5 min-w-0 flex-1">
+        <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1 min-w-0 flex-1">
           {categories.map((c) => (
             <button
               key={c.id}
               onClick={() => setFilters({ category: c.id })}
-              className={`px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all tap-target-44 flex items-center ${
+              className={`px-3.5 py-1.5 h-9 rounded-full text-xs font-bold whitespace-nowrap transition-all flex items-center justify-center text-center shrink-0 border cursor-pointer select-none leading-none box-border ${
                 filters.category === c.id
-                  ? 'bg-[var(--color-primary)] text-white shadow-xs'
-                  : 'bg-black/5 dark:bg-white/5 text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-black/10 dark:hover:bg-white/10'
+                  ? 'bg-[var(--color-primary)] text-white border-[var(--color-primary)] shadow-xs'
+                  : 'bg-black/5 dark:bg-white/5 border-[var(--color-border-subtle)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-black/10 dark:hover:bg-white/10'
               }`}
             >
-              {c.label}
+              <span>{c.label}</span>
             </button>
           ))}
         </div>

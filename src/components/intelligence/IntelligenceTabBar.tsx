@@ -152,15 +152,15 @@ export const IntelligenceTabBar: React.FC<IntelligenceTabBarProps> = memo(({
         </div>
       )}
 
-      {/* Main Tab Bar Dock */}
-      <div className="fixed bottom-0 inset-x-0 z-40 px-2 sm:px-6 pb-2.5 pt-2 pointer-events-none safe-bottom">
+      {/* Main Tab Bar Dock - Fixed Horizontal Toolbar at Bottom */}
+      <div className="fixed bottom-0 inset-x-0 z-40 px-2 sm:px-4 md:px-6 pb-2.5 pt-1.5 pointer-events-none safe-bottom">
         <nav
-          className="max-w-4xl mx-auto pointer-events-auto liquid-glass-nav rounded-2xl sm:rounded-full px-2 sm:px-3 py-1.5 flex items-center justify-around md:justify-between shadow-2xl specular-line"
+          className="max-w-5xl mx-auto pointer-events-auto liquid-glass-nav rounded-2xl sm:rounded-full px-2 sm:px-3 md:px-4 py-1.5 shadow-2xl specular-line border border-[var(--color-border)]"
           role="navigation"
-          aria-label="Intelligence Navigation"
+          aria-label="Intelligence Navigation Toolbar"
         >
-          {/* MOBILE VIEW (< 768px): 4 Core tabs + 1 "More" hub button */}
-          <div className="flex md:hidden items-center justify-between w-full">
+          {/* PHONE VIEW (< 768px): 5 equal columns (4 core hubs + 1 More hub overflow) */}
+          <div className="grid grid-cols-5 md:hidden w-full items-center">
             {mobileCoreTabs.map((item) => {
               const isActive = activeTab === item.id;
               const Icon = item.icon;
@@ -169,7 +169,7 @@ export const IntelligenceTabBar: React.FC<IntelligenceTabBarProps> = memo(({
                 <button
                   key={item.id}
                   onClick={() => handleSelect(item.id)}
-                  className={`relative flex flex-col items-center justify-center py-1 px-2.5 rounded-full tap-target-44 interactive-press transition-all shrink-0 ${
+                  className={`relative flex flex-col items-center justify-center py-1.5 px-1 rounded-xl tap-target-44 interactive-press transition-colors select-none ${
                     isActive
                       ? 'text-[var(--color-primary)] font-bold'
                       : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]'
@@ -177,10 +177,10 @@ export const IntelligenceTabBar: React.FC<IntelligenceTabBarProps> = memo(({
                   aria-current={isActive ? 'page' : undefined}
                 >
                   {isActive && (
-                    <span className="absolute inset-0 rounded-full bg-[var(--color-primary-subtle)] -z-10 animate-fade-in" />
+                    <span className="absolute inset-0 rounded-xl bg-[var(--color-primary-subtle)] -z-10" />
                   )}
-                  <Icon className={`w-4 h-4 transition-transform ${isActive ? 'scale-110' : ''}`} />
-                  <span className="text-[10px] tracking-tight mt-0.5 whitespace-nowrap">
+                  <Icon className={`w-4 h-4 shrink-0 transition-transform ${isActive ? 'scale-110' : ''}`} />
+                  <span className="text-[10px] tracking-tight mt-0.5 truncate max-w-full">
                     {item.label}
                   </span>
                 </button>
@@ -190,7 +190,7 @@ export const IntelligenceTabBar: React.FC<IntelligenceTabBarProps> = memo(({
             {/* 5th slot: More Hubs button */}
             <button
               onClick={() => setShowMobileDrawer((prev) => !prev)}
-              className={`relative flex flex-col items-center justify-center py-1 px-2.5 rounded-full tap-target-44 interactive-press transition-all shrink-0 ${
+              className={`relative flex flex-col items-center justify-center py-1.5 px-1 rounded-xl tap-target-44 interactive-press transition-colors select-none ${
                 isSecondaryActive || showMobileDrawer
                   ? 'text-[var(--color-primary)] font-bold'
                   : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]'
@@ -199,9 +199,9 @@ export const IntelligenceTabBar: React.FC<IntelligenceTabBarProps> = memo(({
               aria-expanded={showMobileDrawer}
             >
               {(isSecondaryActive || showMobileDrawer) && (
-                <span className="absolute inset-0 rounded-full bg-[var(--color-primary-subtle)] -z-10 animate-fade-in" />
+                <span className="absolute inset-0 rounded-xl bg-[var(--color-primary-subtle)] -z-10" />
               )}
-              <div className="relative">
+              <div className="relative shrink-0">
                 {isSecondaryActive && activeSecondaryItem ? (
                   React.createElement(activeSecondaryItem.icon, { className: 'w-4 h-4 scale-110' })
                 ) : (
@@ -213,14 +213,14 @@ export const IntelligenceTabBar: React.FC<IntelligenceTabBarProps> = memo(({
                   </span>
                 )}
               </div>
-              <span className="text-[10px] tracking-tight mt-0.5 whitespace-nowrap">
+              <span className="text-[10px] tracking-tight mt-0.5 truncate max-w-full">
                 {isSecondaryActive && activeSecondaryItem ? activeSecondaryItem.label : 'More'}
               </span>
             </button>
           </div>
 
-          {/* TABLET & DESKTOP VIEW (>= 768px): All 10 hubs in spacious layout */}
-          <div className="hidden md:flex items-center justify-between w-full gap-1">
+          {/* TABLET & DESKTOP VIEW (>= 768px): All 10 hubs in single horizontal row, evenly spaced */}
+          <div className="hidden md:grid grid-cols-10 w-full items-center gap-1">
             {allTabs.map((item) => {
               const isActive = activeTab === item.id;
               const Icon = item.icon;
@@ -229,7 +229,7 @@ export const IntelligenceTabBar: React.FC<IntelligenceTabBarProps> = memo(({
                 <button
                   key={item.id}
                   onClick={() => handleSelect(item.id)}
-                  className={`relative flex flex-col items-center justify-center py-1 px-2.5 lg:px-3 rounded-full tap-target-44 interactive-press transition-all shrink-0 ${
+                  className={`relative flex flex-col items-center justify-center py-1.5 px-1 rounded-xl tap-target-44 interactive-press transition-colors select-none ${
                     isActive
                       ? 'text-[var(--color-primary)] font-bold'
                       : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]'
@@ -238,19 +238,19 @@ export const IntelligenceTabBar: React.FC<IntelligenceTabBarProps> = memo(({
                   aria-current={isActive ? 'page' : undefined}
                 >
                   {isActive && (
-                    <span className="absolute inset-0 rounded-full bg-[var(--color-primary-subtle)] -z-10 animate-fade-in" />
+                    <span className="absolute inset-0 rounded-xl bg-[var(--color-primary-subtle)] -z-10" />
                   )}
 
-                  <div className="relative">
+                  <div className="relative shrink-0">
                     <Icon className={`w-4 h-4 sm:w-5 sm:h-5 transition-transform ${isActive ? 'scale-110' : ''}`} />
                     {item.badge !== undefined && (
-                      <span className="absolute -top-1.5 -right-2 px-1 min-w-[14px] h-3 rounded-full bg-[var(--color-error)] text-white text-[9px] font-extrabold flex items-center justify-center">
+                      <span className="absolute -top-1 -right-2 px-1 min-w-[14px] h-3.5 rounded-full bg-[var(--color-error)] text-white text-[9px] font-extrabold flex items-center justify-center">
                         {item.badge}
                       </span>
                     )}
                   </div>
 
-                  <span className="text-[10px] tracking-tight mt-0.5 whitespace-nowrap">
+                  <span className="text-[10px] tracking-tight mt-0.5 truncate max-w-full">
                     {item.label}
                   </span>
                 </button>

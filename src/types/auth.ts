@@ -26,6 +26,7 @@ export interface SystemSettings {
   pauseRegistrations: boolean;
   disableMemberAccess: boolean;
   emergencyMessage?: string;
+  adminUploadCode?: string;
 }
 
 export interface AdminOverview {

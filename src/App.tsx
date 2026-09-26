@@ -3,36 +3,93 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { ThemeProvider } from './context/ThemeContext';
 import { IntelligenceProvider } from './context/IntelligenceContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { AmbientBackground } from './components/glass/AmbientBackground';
 import { IntelligenceNavbar } from './components/intelligence/IntelligenceNavbar';
 import { IntelligenceTabBar, IntelligenceTab } from './components/intelligence/IntelligenceTabBar';
-import { SearchIntelligenceModal } from './components/intelligence/SearchIntelligenceModal';
-import { PersonalizedOnboardingModal } from './components/intelligence/PersonalizedOnboardingModal';
-import { AlertsManagerModal } from './components/intelligence/AlertsManagerModal';
-import { SecureAdminDashboard } from './components/admin/SecureAdminDashboard';
-import { SecureAuthModal } from './components/auth/SecureAuthModal';
-import { ArticleDetailModal } from './components/intelligence/ArticleDetailModal';
-import { AddNewsModal } from './components/upload/AddNewsModal';
+import { AppOpeningAnimation } from './components/brand/AppOpeningAnimation';
 import { ErrorBoundary } from './components/shared/ErrorBoundary';
 import { OfflineBanner } from './components/shared/OfflineBanner';
+import { FpsDebugOverlay } from './components/shared/FpsDebugOverlay';
 import { NewsEventItem } from './types/intelligence';
 import { AlertTriangle } from 'lucide-react';
 
-// Intelligence Views
-import { HomeDashboardView } from './pages/intelligence/HomeDashboardView';
-import { MyFeedView } from './pages/intelligence/MyFeedView';
-import { StartupsView } from './pages/intelligence/StartupsView';
-import { FundingView } from './pages/intelligence/FundingView';
-import { InvestorsView } from './pages/intelligence/InvestorsView';
-import { SchemesView } from './pages/intelligence/SchemesView';
-import { OpportunitiesView } from './pages/intelligence/OpportunitiesView';
-import { EventsView } from './pages/intelligence/EventsView';
-import { ProblemsView } from './pages/intelligence/ProblemsView';
-import { SavedView } from './pages/intelligence/SavedView';
+// Code-split and lazy-load views so only the current screen's bundle is parsed
+const HomeDashboardView = lazy(() =>
+  import('./pages/intelligence/HomeDashboardView').then((m) => ({ default: m.HomeDashboardView }))
+);
+const MyFeedView = lazy(() =>
+  import('./pages/intelligence/MyFeedView').then((m) => ({ default: m.MyFeedView }))
+);
+const StartupsView = lazy(() =>
+  import('./pages/intelligence/StartupsView').then((m) => ({ default: m.StartupsView }))
+);
+const FundingView = lazy(() =>
+  import('./pages/intelligence/FundingView').then((m) => ({ default: m.FundingView }))
+);
+const InvestorsView = lazy(() =>
+  import('./pages/intelligence/InvestorsView').then((m) => ({ default: m.InvestorsView }))
+);
+const SchemesView = lazy(() =>
+  import('./pages/intelligence/SchemesView').then((m) => ({ default: m.SchemesView }))
+);
+const OpportunitiesView = lazy(() =>
+  import('./pages/intelligence/OpportunitiesView').then((m) => ({ default: m.OpportunitiesView }))
+);
+const EventsView = lazy(() =>
+  import('./pages/intelligence/EventsView').then((m) => ({ default: m.EventsView }))
+);
+const ProblemsView = lazy(() =>
+  import('./pages/intelligence/ProblemsView').then((m) => ({ default: m.ProblemsView }))
+);
+const SavedView = lazy(() =>
+  import('./pages/intelligence/SavedView').then((m) => ({ default: m.SavedView }))
+);
+
+// Code-split and lazy-load heavy modals
+const SearchIntelligenceModal = lazy(() =>
+  import('./components/intelligence/SearchIntelligenceModal').then((m) => ({
+    default: m.SearchIntelligenceModal,
+  }))
+);
+const PersonalizedOnboardingModal = lazy(() =>
+  import('./components/intelligence/PersonalizedOnboardingModal').then((m) => ({
+    default: m.PersonalizedOnboardingModal,
+  }))
+);
+const AlertsManagerModal = lazy(() =>
+  import('./components/intelligence/AlertsManagerModal').then((m) => ({
+    default: m.AlertsManagerModal,
+  }))
+);
+const SecureAdminDashboard = lazy(() =>
+  import('./components/admin/SecureAdminDashboard').then((m) => ({
+    default: m.SecureAdminDashboard,
+  }))
+);
+const SecureAuthModal = lazy(() =>
+  import('./components/auth/SecureAuthModal').then((m) => ({
+    default: m.SecureAuthModal,
+  }))
+);
+const ArticleDetailModal = lazy(() =>
+  import('./components/intelligence/ArticleDetailModal').then((m) => ({
+    default: m.ArticleDetailModal,
+  }))
+);
+const AddNewsModal = lazy(() =>
+  import('./components/upload/AddNewsModal').then((m) => ({
+    default: m.AddNewsModal,
+  }))
+);
+const SettingsModal = lazy(() =>
+  import('./components/settings/SettingsModal').then((m) => ({
+    default: m.SettingsModal,
+  }))
+);
 
 function AppContent() {
   const { currentUser, isAdmin, systemSettings } = useAuth();
@@ -43,6 +100,7 @@ function AppContent() {
   const [isAlertsOpen, setIsAlertsOpen] = useState(false);
   const [isAdminOpen, setIsAdminOpen] = useState(false);
   const [isAddNewsOpen, setIsAddNewsOpen] = useState(false);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   // Authentication modal state
   const [isAuthOpen, setIsAuthOpen] = useState(false);
@@ -62,6 +120,9 @@ function AppContent() {
 
   return (
     <div className="relative min-h-[100dvh] flex flex-col font-sans transition-colors duration-300">
+      {/* App Opening Animation with Globe and Growth Trajectory */}
+      <AppOpeningAnimation minDurationMs={1800} />
+
       {/* Dynamic Ambient Fluid Nodes (Level 1 Glass Canvas) */}
       <AmbientBackground />
 
@@ -98,6 +159,7 @@ function AppContent() {
           setAuthMode(mode);
           setIsAuthOpen(true);
         }}
+        onOpenSettings={() => setIsSettingsOpen(true)}
       />
 
       {/* Main Container */}
@@ -106,85 +168,124 @@ function AppContent() {
         <OfflineBanner />
 
         <ErrorBoundary fallbackTitle="Something went wrong.">
-          {activeTab === 'home' && (
-            <HomeDashboardView
-              onOpenArticle={(item) => setSelectedArticle(item)}
-              onNavigateTab={(tab) => setActiveTab(tab)}
-            />
-          )}
+          <Suspense fallback={null}>
+            {activeTab === 'home' && (
+              <HomeDashboardView
+                onOpenArticle={(item) => setSelectedArticle(item)}
+                onNavigateTab={(tab) => setActiveTab(tab)}
+              />
+            )}
 
-          {activeTab === 'my-feed' && (
-            <MyFeedView
-              onOpenArticle={(item) => setSelectedArticle(item)}
-              onOpenPreferences={() => setIsPreferencesOpen(true)}
-            />
-          )}
+            {activeTab === 'my-feed' && (
+              <MyFeedView
+                onOpenArticle={(item) => setSelectedArticle(item)}
+                onOpenPreferences={() => setIsPreferencesOpen(true)}
+              />
+            )}
 
-          {activeTab === 'startups' && <StartupsView />}
+            {activeTab === 'startups' && <StartupsView />}
 
-          {activeTab === 'funding' && <FundingView />}
+            {activeTab === 'funding' && <FundingView />}
 
-          {activeTab === 'investors' && <InvestorsView />}
+            {activeTab === 'investors' && <InvestorsView />}
 
-          {activeTab === 'schemes' && <SchemesView />}
+            {activeTab === 'schemes' && <SchemesView />}
 
-          {activeTab === 'opportunities' && <OpportunitiesView />}
+            {activeTab === 'opportunities' && <OpportunitiesView />}
 
-          {activeTab === 'events' && <EventsView />}
+            {activeTab === 'events' && <EventsView />}
 
-          {activeTab === 'problems' && <ProblemsView />}
+            {activeTab === 'problems' && <ProblemsView />}
 
-          {activeTab === 'saved' && (
-            <SavedView onOpenArticle={(item) => setSelectedArticle(item)} />
-          )}
+            {activeTab === 'saved' && (
+              <SavedView onOpenArticle={(item) => setSelectedArticle(item)} />
+            )}
+          </Suspense>
         </ErrorBoundary>
       </main>
 
       {/* iOS 26 Floating Dock Tab Navigation */}
       <IntelligenceTabBar activeTab={activeTab} onSelectTab={setActiveTab} />
 
-      {/* Search Intelligence Modal */}
-      <SearchIntelligenceModal
-        isOpen={isSearchOpen}
-        onClose={() => setIsSearchOpen(false)}
-      />
+      {/* Hidden Debug FPS & Frame-time Overlay (toggle with long press on brand logo or Shift+F) */}
+      <FpsDebugOverlay />
 
-      {/* Founder Preferences Onboarding Modal */}
-      <PersonalizedOnboardingModal
-        isOpen={isPreferencesOpen}
-        onClose={() => setIsPreferencesOpen(false)}
-      />
+      {/* Heavy Modals code-split & lazy-loaded inside Suspense */}
+      <Suspense fallback={null}>
+        {/* Search Intelligence Modal (rendered on-demand) */}
+        {isSearchOpen && (
+          <SearchIntelligenceModal
+            isOpen={isSearchOpen}
+            onClose={() => setIsSearchOpen(false)}
+          />
+        )}
 
-      {/* Alerts Manager Modal */}
-      <AlertsManagerModal
-        isOpen={isAlertsOpen}
-        onClose={() => setIsAlertsOpen(false)}
-      />
+        {/* Founder Preferences Onboarding Modal */}
+        {isPreferencesOpen && (
+          <PersonalizedOnboardingModal
+            isOpen={isPreferencesOpen}
+            onClose={() => setIsPreferencesOpen(false)}
+          />
+        )}
 
-      {/* Secure Administrator Management Dashboard Console */}
-      <SecureAdminDashboard
-        isOpen={isAdminOpen}
-        onClose={() => setIsAdminOpen(false)}
-      />
+        {/* Alerts Manager Modal */}
+        {isAlertsOpen && (
+          <AlertsManagerModal
+            isOpen={isAlertsOpen}
+            onClose={() => setIsAlertsOpen(false)}
+          />
+        )}
 
-      {/* Secure Authentication Modal (Sign In / Sign Up / Forgot Password) */}
-      <SecureAuthModal
-        isOpen={isAuthOpen}
-        onClose={() => setIsAuthOpen(false)}
-        initialMode={authMode}
-      />
+        {/* Secure Administrator Management Dashboard Console */}
+        {isAdminOpen && (
+          <SecureAdminDashboard
+            isOpen={isAdminOpen}
+            onClose={() => setIsAdminOpen(false)}
+          />
+        )}
 
-      {/* Article Detail Reader Modal */}
-      <ArticleDetailModal
-        item={selectedArticle}
-        onClose={() => setSelectedArticle(null)}
-      />
+        {/* Secure Authentication Modal (Sign In / Sign Up / Forgot Password) */}
+        {isAuthOpen && (
+          <SecureAuthModal
+            isOpen={isAuthOpen}
+            onClose={() => setIsAuthOpen(false)}
+            initialMode={authMode}
+            onSuccess={(user) => {
+              if (user.role === 'admin') {
+                setIsAdminOpen(true);
+              } else if (user.role === 'uploader') {
+                setActiveTab('my-feed');
+              } else {
+                setActiveTab('home');
+              }
+            }}
+          />
+        )}
 
-      {/* Complete News Upload & Verification System Modal (Camera, OCR, Fact-check, Similarity) */}
-      <AddNewsModal
-        isOpen={isAddNewsOpen}
-        onClose={() => setIsAddNewsOpen(false)}
-      />
+        {/* Article Detail Reader Modal */}
+        {selectedArticle && (
+          <ArticleDetailModal
+            item={selectedArticle}
+            onClose={() => setSelectedArticle(null)}
+          />
+        )}
+
+        {/* Complete News Upload & Verification System Modal (Camera, OCR, Fact-check, Similarity) */}
+        {isAddNewsOpen && (
+          <AddNewsModal
+            isOpen={isAddNewsOpen}
+            onClose={() => setIsAddNewsOpen(false)}
+          />
+        )}
+
+        {/* Global Settings & Appearance Modal (Theme, Color Palettes, Custom Accent Engine) */}
+        {isSettingsOpen && (
+          <SettingsModal
+            isOpen={isSettingsOpen}
+            onClose={() => setIsSettingsOpen(false)}
+          />
+        )}
+      </Suspense>
     </div>
   );
 }

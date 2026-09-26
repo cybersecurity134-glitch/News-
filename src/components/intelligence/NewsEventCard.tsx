@@ -17,24 +17,51 @@ interface NewsEventCardProps {
 
 const getCategoryBadgeClass = (cat: NewsCategory): string => {
   switch (cat) {
-    case 'news':
-      return 'badge-section-news';
-    case 'startup_launch':
-      return 'badge-section-startups';
     case 'funding':
+    case 'acquisitions':
       return 'badge-section-funding';
-    case 'scheme':
-      return 'badge-section-schemes';
-    case 'investor_call':
+    case 'startup-launches':
+      return 'badge-section-startups';
+    case 'investors':
       return 'badge-section-investors';
-    case 'grant_rfp':
+    case 'government-schemes':
+    case 'regulations':
+      return 'badge-section-schemes';
+    case 'opportunities':
       return 'badge-section-grants';
-    case 'pitch_day':
+    case 'events':
       return 'badge-section-events';
-    case 'problem_reported':
+    case 'problems':
       return 'badge-section-problems';
+    case 'technology':
+    case 'all':
     default:
       return 'badge-section-news';
+  }
+};
+
+const getCardAccentClass = (cat: NewsCategory): string => {
+  switch (cat) {
+    case 'funding':
+    case 'acquisitions':
+      return 'card-accent-top-funding';
+    case 'startup-launches':
+      return 'card-accent-top-startups';
+    case 'investors':
+      return 'card-accent-top-investors';
+    case 'government-schemes':
+    case 'regulations':
+      return 'card-accent-top-schemes';
+    case 'opportunities':
+      return 'card-accent-top-grants';
+    case 'events':
+      return 'card-accent-top-events';
+    case 'problems':
+      return 'card-accent-top-problems';
+    case 'technology':
+    case 'all':
+    default:
+      return 'card-accent-top-news';
   }
 };
 
@@ -69,11 +96,12 @@ export const NewsEventCard: React.FC<NewsEventCardProps> = memo(({
   };
 
   const badgeClass = getCategoryBadgeClass(item.category);
+  const cardAccentClass = getCardAccentClass(item.category);
 
   return (
     <article
       onClick={() => onOpenItem?.(item)}
-      className="liquid-glass-card p-5 flex flex-col justify-between select-none cursor-pointer group space-y-4"
+      className={`liquid-glass-card ${cardAccentClass} p-5 flex flex-col justify-between select-none cursor-pointer group space-y-4`}
     >
       <div>
         {/* Why am I seeing this badge (if in personalized feed) */}

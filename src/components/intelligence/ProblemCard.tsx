@@ -13,7 +13,7 @@ interface ProblemCardProps {
 
 export const ProblemCard: React.FC<ProblemCardProps> = memo(({ problem }) => {
   return (
-    <div className="liquid-glass-card p-5 space-y-4 select-none">
+    <div className="liquid-glass-card card-accent-top-problems p-5 space-y-4 select-none">
       {/* Header */}
       <div className="flex items-start justify-between gap-3">
         <div>

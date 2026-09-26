@@ -416,13 +416,13 @@ export const AddNewsModal: React.FC<AddNewsModalProps> = ({
           {/* Header */}
           <div className="px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between border-b border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 shrink-0">
             <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-gradient-to-tr from-[#0071E3] to-[#34C759] flex items-center justify-center text-white shadow-md shrink-0">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-[var(--color-primary)] flex items-center justify-center text-[var(--color-primary-fg)] shadow-md shrink-0">
                 <Sparkles className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
               <div className="min-w-0">
                 <h2 className="text-sm sm:text-base font-extrabold text-[var(--text-primary)] flex items-center gap-1.5 sm:gap-2 truncate">
                   <span>News Verification</span>
-                  <span className="hidden xs:inline-flex text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-500/10 text-[var(--accent-primary)] border border-blue-500/20">
+                  <span className="hidden xs:inline-flex text-[10px] font-bold px-2 py-0.5 rounded-full bg-[var(--color-primary-subtle)] text-[var(--color-primary)] border border-[var(--color-primary-border)]">
                     Dual Pipeline
                   </span>
                 </h2>
@@ -719,12 +719,12 @@ export const AddNewsModal: React.FC<AddNewsModalProps> = ({
                     {/* People & Orgs */}
                     <div className="space-y-1.5">
                       <span className="text-[11px] font-bold text-[var(--text-secondary)] flex items-center gap-1">
-                        <User className="w-3.5 h-3.5 text-blue-500" /> People Mentioned:
+                        <User className="w-3.5 h-3.5 text-[var(--color-primary)]" /> People Mentioned:
                       </span>
                       <div className="flex flex-wrap gap-1">
                         {extractedEntities.people.length > 0 ? (
-                          extractedEntities.people.map((p, i) => (
-                            <span key={i} className="px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-600 dark:text-blue-400 text-[11px] font-semibold">
+                           extractedEntities.people.map((p, i) => (
+                            <span key={i} className="px-2 py-0.5 rounded-full bg-[var(--color-primary-subtle)] text-[var(--color-primary)] text-[11px] font-semibold">
                               {p}
                             </span>
                           ))
@@ -737,12 +737,12 @@ export const AddNewsModal: React.FC<AddNewsModalProps> = ({
                     {/* Companies & Schemes */}
                     <div className="space-y-1.5">
                       <span className="text-[11px] font-bold text-[var(--text-secondary)] flex items-center gap-1">
-                        <Building className="w-3.5 h-3.5 text-emerald-500" /> Companies & Startups:
+                        <Building className="w-3.5 h-3.5 text-[var(--color-success)]" /> Companies & Startups:
                       </span>
                       <div className="flex flex-wrap gap-1">
                         {extractedEntities.companies.length > 0 ? (
                           extractedEntities.companies.map((c, i) => (
-                            <span key={i} className="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 text-[11px] font-semibold">
+                            <span key={i} className="px-2 py-0.5 rounded-full bg-[var(--color-success-bg)] text-[var(--color-success-fg)] text-[11px] font-semibold">
                               {c}
                             </span>
                           ))
@@ -755,12 +755,12 @@ export const AddNewsModal: React.FC<AddNewsModalProps> = ({
                     {/* Government Schemes */}
                     <div className="space-y-1.5">
                       <span className="text-[11px] font-bold text-[var(--text-secondary)] flex items-center gap-1">
-                        <Landmark className="w-3.5 h-3.5 text-purple-500" /> Government Schemes / Policy:
+                        <Landmark className="w-3.5 h-3.5 text-[var(--color-accent)]" /> Government Schemes / Policy:
                       </span>
                       <div className="flex flex-wrap gap-1">
                         {extractedEntities.governmentSchemes.length > 0 ? (
                           extractedEntities.governmentSchemes.map((s, i) => (
-                            <span key={i} className="px-2 py-0.5 rounded-full bg-purple-500/15 text-purple-600 dark:text-purple-400 text-[11px] font-semibold">
+                            <span key={i} className="px-2 py-0.5 rounded-full bg-[var(--color-accent-subtle)] text-[var(--color-accent)] text-[11px] font-semibold">
                               {s}
                             </span>
                           ))
@@ -1027,7 +1027,7 @@ export const AddNewsModal: React.FC<AddNewsModalProps> = ({
 
                 {/* Strict AI Confidence Disclaimer mandated by user guidelines */}
                 <div className="p-3 rounded-2xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-[11px] text-[var(--text-secondary)] flex items-start gap-2">
-                  <Info className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" />
+                  <Info className="w-4 h-4 text-[var(--color-primary)] shrink-0 mt-0.5" />
                   <div>
                     <span className="font-bold text-[var(--text-primary)]">Editorial Standard Disclaimer: </span>
                     {verificationReport.aiConfidenceDisclaimer}
@@ -1084,8 +1084,8 @@ export const AddNewsModal: React.FC<AddNewsModalProps> = ({
                   )}
                 </div>
 
-                <div className="p-3.5 rounded-2xl bg-blue-500/10 border border-blue-500/20 text-xs text-[var(--text-secondary)] flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-blue-500 shrink-0" />
+                <div className="p-3.5 rounded-2xl bg-[var(--color-info-bg)] border border-[var(--color-info-border)] text-xs text-[var(--text-secondary)] flex items-center gap-2">
+                  <ShieldCheck className="w-4 h-4 text-[var(--color-info-fg)] shrink-0" />
                   <span>
                     <strong>Submission Queue:</strong> Regular users submit to the verification queue. Submissions are reviewed by editorial administration prior to general publication.
                   </span>
@@ -1096,7 +1096,7 @@ export const AddNewsModal: React.FC<AddNewsModalProps> = ({
             {/* STEP 5: SUCCESS & TRACKING */}
             {currentStep === 'success' && createdSubmission && (
               <div className="py-8 text-center space-y-4 animate-fade-in">
-                <div className="w-16 h-16 rounded-3xl bg-emerald-500/20 text-emerald-500 flex items-center justify-center mx-auto shadow-lg">
+                <div className="w-16 h-16 rounded-3xl bg-[var(--color-success-bg)] text-[var(--color-success-fg)] flex items-center justify-center mx-auto shadow-lg">
                   <CheckCircle2 className="w-8 h-8" />
                 </div>
                 <div>

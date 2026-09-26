@@ -45,6 +45,57 @@ newsVerificationRouter.post('/extract', async (req: Request, res: Response) => {
 });
 
 /**
+ * 1b. POST /api/news-verification/stream-summary
+ * Streams AI responses token-by-token with strict 100-150 token budget and trimmed context
+ */
+newsVerificationRouter.post(['/stream-summary', '/api/news-verification/stream-summary'], async (req: Request, res: Response) => {
+  const { text, headline, contextHistory, maxTokens } = req.body;
+
+  if (!text && !headline) {
+    return res.status(400).json({ error: 'Text or headline required for summary streaming.' });
+  }
+
+  res.setHeader('Content-Type', 'text/event-stream; charset=utf-8');
+  res.setHeader('Cache-Control', 'no-cache, no-transform');
+  res.setHeader('Connection', 'keep-alive');
+  res.setHeader('X-Accel-Buffering', 'no');
+
+  let isAborted = false;
+  req.on('close', () => {
+    isAborted = true;
+  });
+
+  try {
+    const generator = NewsVerificationEngine.streamExecutiveSummary({
+      text: text || '',
+      headline,
+      contextHistory: Array.isArray(contextHistory) ? contextHistory : [],
+      maxTokens: maxTokens || 120,
+    });
+
+    for await (const token of generator) {
+      if (isAborted) break;
+      res.write(`data: ${JSON.stringify({ token })}\n\n`);
+      if (typeof (res as any).flush === 'function') {
+        (res as any).flush();
+      }
+    }
+
+    if (!isAborted) {
+      res.write('data: [DONE]\n\n');
+      res.end();
+    }
+  } catch (err: any) {
+    if (!res.headersSent) {
+      res.status(500).json({ error: 'Streaming failed: ' + err.message });
+    } else {
+      res.write(`data: ${JSON.stringify({ error: err.message })}\n\n`);
+      res.end();
+    }
+  }
+});
+
+/**
  * 2. POST /api/news-verification/verify
  * Runs full verification pipeline, safety check, source check, and similarity check
  */

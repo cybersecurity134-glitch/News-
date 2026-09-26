@@ -412,7 +412,7 @@ export const UploadForm: React.FC<UploadFormProps> = ({ onSuccess }) => {
             />
           </div>
           <div>
-            <label className="block text-[11px] font-semibold text-blue-500 mb-1">
+            <label className="block text-[11px] font-semibold text-[var(--color-primary)] mb-1">
               Part 2: The Fix (Engineering Solution / Strategic Workaround)
             </label>
             <textarea
@@ -434,10 +434,10 @@ export const UploadForm: React.FC<UploadFormProps> = ({ onSuccess }) => {
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full py-3 px-6 rounded-full font-bold text-sm bg-[var(--color-accent)] text-[#0B1F3A] hover:opacity-95 active:scale-[0.99] transition-all flex items-center justify-center gap-2 shadow-xs"
+          className="w-full py-3 px-6 rounded-full font-bold text-sm bg-[var(--color-accent)] text-[var(--color-accent-fg)] hover:opacity-95 active:scale-[0.99] transition-all flex items-center justify-center gap-2 shadow-xs"
         >
           {isLoading ? (
-            <div className="w-4 h-4 border-2 border-[#0B1F3A] border-t-transparent rounded-full animate-spin" />
+            <div className="w-4 h-4 border-2 border-[var(--color-accent-fg)] border-t-transparent rounded-full animate-spin" />
           ) : (
             <>
               <Send className="w-4 h-4" />

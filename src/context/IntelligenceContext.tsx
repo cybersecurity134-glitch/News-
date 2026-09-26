@@ -95,9 +95,23 @@ const IntelligenceContext = createContext<IntelligenceContextType | undefined>(u
 const PREFS_STORAGE_KEY = 'vp_intelligence_prefs_v1';
 const SAVED_STORAGE_KEY = 'vp_intelligence_saved_v1';
 const ALERTS_STORAGE_KEY = 'vp_intelligence_alerts_v1';
+const NEWS_CACHE_KEY = 'vp_intelligence_news_cache_v2';
 
 export const IntelligenceProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [newsEvents, setNewsEvents] = useState<NewsEventItem[]>(MOCK_NEWS_EVENTS);
+  // Stale-while-revalidate: synchronous initial load from cache for instant first paint
+  const [newsEvents, setNewsEvents] = useState<NewsEventItem[]>(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const cached = localStorage.getItem(NEWS_CACHE_KEY);
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        }
+      } catch {}
+    }
+    return MOCK_NEWS_EVENTS;
+  });
+
   const [startups] = useState<StartupEntity[]>(MOCK_STARTUPS_DIRECTORY);
   const [fundingEvents] = useState<FundingEvent[]>(MOCK_FUNDING_EVENTS);
   const [investors] = useState<InvestorProfile[]>(MOCK_INVESTORS_LIST);
@@ -109,6 +123,37 @@ export const IntelligenceProvider: React.FC<{ children: React.ReactNode }> = ({ 
 
   const [filters, setFiltersState] = useState<FilterState>(DEFAULT_FILTERS);
   const [isRefreshing, setIsRefreshing] = useState(false);
+
+  // Background revalidation & prefetch off the main thread (requestIdleCallback)
+  useEffect(() => {
+    const idleTask = () => {
+      // Revalidate breaking news ticker and cache updates in the background
+      fetch('/api/breaking-ticker')
+        .then((res) => (res.ok ? res.json() : null))
+        .then((data) => {
+          if (data?.ticker) {
+            // Save current news events to cache
+            try {
+              localStorage.setItem(NEWS_CACHE_KEY, JSON.stringify(newsEvents));
+            } catch {}
+          }
+        })
+        .catch(() => {});
+
+      // Prefetch published articles from verification database if available
+      fetch('/api/news-verification/articles')
+        .then((res) => (res.ok ? res.json() : null))
+        .catch(() => {});
+    };
+
+    if (typeof window !== 'undefined') {
+      if ('requestIdleCallback' in window) {
+        (window as any).requestIdleCallback(idleTask, { timeout: 1500 });
+      } else {
+        setTimeout(idleTask, 300);
+      }
+    }
+  }, [newsEvents]);
 
   // User preferences
   const [userPreferences, setUserPreferencesState] = useState<UserPreferences>(() => {
@@ -312,36 +357,57 @@ export const IntelligenceProvider: React.FC<{ children: React.ReactNode }> = ({ 
     return list.length > 0 ? list : newsEvents.slice(0, 4).map((item) => ({ item, reason: 'Featured top intelligence report.' }));
   }, [newsEvents, userPreferences]);
 
+  const contextValue = useMemo(
+    () => ({
+      newsEvents,
+      startups,
+      fundingEvents,
+      investors,
+      governmentSchemes,
+      opportunities,
+      events,
+      problems,
+      adminStatus,
+      userPreferences,
+      setUserPreferences,
+      filters,
+      setFilters,
+      resetFilters,
+      savedItemIds,
+      toggleSaveItem,
+      isItemSaved,
+      alerts,
+      addAlert,
+      removeAlert,
+      toggleAlert,
+      isRefreshing,
+      refreshData,
+      filteredNews,
+      personalizedFeed,
+    }),
+    [
+      newsEvents,
+      startups,
+      fundingEvents,
+      investors,
+      governmentSchemes,
+      opportunities,
+      events,
+      problems,
+      adminStatus,
+      userPreferences,
+      filters,
+      savedItemIds,
+      alerts,
+      isRefreshing,
+      refreshData,
+      filteredNews,
+      personalizedFeed,
+    ]
+  );
+
   return (
-    <IntelligenceContext.Provider
-      value={{
-        newsEvents,
-        startups,
-        fundingEvents,
-        investors,
-        governmentSchemes,
-        opportunities,
-        events,
-        problems,
-        adminStatus,
-        userPreferences,
-        setUserPreferences,
-        filters,
-        setFilters,
-        resetFilters,
-        savedItemIds,
-        toggleSaveItem,
-        isItemSaved,
-        alerts,
-        addAlert,
-        removeAlert,
-        toggleAlert,
-        isRefreshing,
-        refreshData,
-        filteredNews,
-        personalizedFeed,
-      }}
-    >
+    <IntelligenceContext.Provider value={contextValue}>
       {children}
     </IntelligenceContext.Provider>
   );

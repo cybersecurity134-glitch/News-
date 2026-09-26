@@ -37,14 +37,14 @@ export const TabBar: React.FC<TabBarProps> = ({
       label: 'Verification',
       icon: ShieldCheck,
       badge: pendingQueueCount,
-      badgeColor: 'bg-amber-500',
+      badgeColor: 'bg-[var(--color-warning)]',
     },
     {
       id: 'chat' as AppTab,
       label: '1:1 Chat',
       icon: MessageSquare,
       badge: unreadChatCount,
-      badgeColor: 'bg-[#007AFF]',
+      badgeColor: 'bg-[var(--color-primary)]',
     },
     {
       id: 'profile' as AppTab,
@@ -56,7 +56,7 @@ export const TabBar: React.FC<TabBarProps> = ({
   return (
     <nav
       id="ios-bottom-tab-bar"
-      className="fixed bottom-0 left-0 right-0 z-40 backdrop-blur-xl bg-[#FFFFFF]/90 dark:bg-[#121212]/90 border-t border-[rgba(60,60,67,0.15)] dark:border-[rgba(84,84,88,0.5)] transition-colors"
+      className="fixed bottom-0 left-0 right-0 z-40 backdrop-blur-xl bg-[var(--glass-nav-bg)] border-t border-[var(--glass-nav-border)] transition-colors safe-bottom"
     >
       <div className="max-w-md mx-auto px-4 h-16 flex items-center justify-around">
         {tabs.map((tab) => {
@@ -70,15 +70,15 @@ export const TabBar: React.FC<TabBarProps> = ({
               onClick={() => onSelectTab(tab.id)}
               className={`flex-1 flex flex-col items-center justify-center py-1 relative transition-colors ${
                 isActive
-                  ? 'text-[#007AFF] dark:text-[#0A84FF]'
-                  : 'text-[rgba(60,60,67,0.5)] dark:text-[rgba(235,235,245,0.5)] hover:text-[#000000] dark:hover:text-[#FFFFFF]'
+                  ? 'text-[var(--color-primary)]'
+                  : 'text-[var(--color-text-tertiary)] hover:text-[var(--color-text-primary)]'
               }`}
             >
               <div className="relative">
                 <Icon className={`w-5 h-5 transition-transform ${isActive ? 'scale-110' : ''}`} />
                 {!!tab.badge && tab.badge > 0 && (
                   <span
-                    className={`absolute -top-1 -right-2 px-1.5 py-0.2 rounded-full text-white text-[10px] font-bold ${tab.badgeColor}`}
+                    className={`absolute -top-1 -right-2 px-1.5 py-0.2 rounded-full text-[var(--color-primary-fg)] text-[10px] font-bold ${tab.badgeColor}`}
                   >
                     {tab.badge > 9 ? '9+' : tab.badge}
                   </span>

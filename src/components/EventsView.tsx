@@ -97,7 +97,7 @@ export const EventsView: React.FC<EventsViewProps> = ({ events, isDark: _isDark 
       {/* Events List Cards */}
       <div className="space-y-3">
         {filteredEvents.length === 0 ? (
-          <div className="p-8 text-center rounded-2xl bg-[#F2F2F7] dark:bg-[#1C1C1E] text-[rgba(60,60,67,0.6)] text-sm">
+          <div className="p-8 text-center rounded-2xl bg-[var(--color-surface-elevated)] text-[var(--color-text-secondary)] text-sm">
             No events match your selected filters.
           </div>
         ) : (
@@ -107,7 +107,7 @@ export const EventsView: React.FC<EventsViewProps> = ({ events, isDark: _isDark 
             return (
               <div
                 key={event.id}
-                className="ios-card-press rounded-2xl p-5 bg-[#F2F2F7] dark:bg-[#1C1C1E] border border-[rgba(60,60,67,0.06)] dark:border-[rgba(235,235,245,0.06)] space-y-3 shadow-[0_1px_2px_rgba(0,0,0,0.04)]"
+                className="ios-card-press rounded-2xl p-5 bg-[var(--color-surface-elevated)] border border-[var(--color-border)] space-y-3 shadow-[0_1px_2px_rgba(0,0,0,0.04)]"
               >
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
                   <div className="flex items-center gap-2 flex-wrap">
@@ -121,16 +121,16 @@ export const EventsView: React.FC<EventsViewProps> = ({ events, isDark: _isDark 
                       {badgeMeta.label}
                     </span>
 
-                    <span className="text-xs font-medium text-[rgba(60,60,67,0.7)] dark:text-[rgba(235,235,245,0.7)]">
-                      Organized by <strong className="text-[#000000] dark:text-[#FFFFFF]">{event.organizer}</strong>
+                    <span className="text-xs font-medium text-[var(--color-text-secondary)]">
+                      Organized by <strong className="text-[var(--color-text-primary)]">{event.organizer}</strong>
                     </span>
                   </div>
 
                   <span
                     className={`text-xs px-2.5 py-0.5 rounded-full font-semibold flex items-center gap-1 ${
                       event.isOnline
-                        ? 'bg-blue-500/10 text-blue-600 dark:text-blue-400'
-                        : 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'
+                        ? 'bg-[var(--color-primary-subtle)] text-[var(--color-primary)]'
+                        : 'bg-[var(--color-success-bg)] text-[var(--color-success-fg)]'
                     }`}
                   >
                     {event.isOnline ? <Globe className="w-3 h-3" /> : <MapPin className="w-3 h-3" />}
@@ -139,23 +139,23 @@ export const EventsView: React.FC<EventsViewProps> = ({ events, isDark: _isDark 
                 </div>
 
                 <div>
-                  <h3 className="ios-headline text-[#000000] dark:text-[#FFFFFF] text-lg">
+                  <h3 className="ios-headline text-[var(--color-text-primary)] text-lg">
                     {event.name}
                   </h3>
-                  <p className="text-xs text-[rgba(60,60,67,0.8)] dark:text-[rgba(235,235,245,0.8)] mt-1 leading-relaxed">
+                  <p className="text-xs text-[var(--color-text-secondary)] mt-1 leading-relaxed">
                     {event.description}
                   </p>
                 </div>
 
-                <div className="pt-2 border-t border-[rgba(60,60,67,0.08)] dark:border-[rgba(235,235,245,0.08)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
-                  <div className="flex items-center gap-4 flex-wrap text-[rgba(60,60,67,0.7)] dark:text-[rgba(235,235,245,0.7)]">
-                    <div className="flex items-center gap-1.5 font-medium text-[#000000] dark:text-[#FFFFFF]">
-                      <Calendar className="w-3.5 h-3.5 text-[#007AFF] dark:text-[#0A84FF]" />
+                <div className="pt-2 border-t border-[var(--color-border)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
+                  <div className="flex items-center gap-4 flex-wrap text-[var(--color-text-secondary)]">
+                    <div className="flex items-center gap-1.5 font-medium text-[var(--color-text-primary)]">
+                      <Calendar className="w-3.5 h-3.5 text-[var(--color-primary)]" />
                       <span>{event.dateTime}</span>
                     </div>
 
                     <div className="flex items-center gap-1.5">
-                      <MapPin className="w-3.5 h-3.5 text-[rgba(60,60,67,0.5)]" />
+                      <MapPin className="w-3.5 h-3.5 text-[var(--color-text-tertiary)]" />
                       <span>{event.venue}</span>
                     </div>
                   </div>
@@ -164,7 +164,7 @@ export const EventsView: React.FC<EventsViewProps> = ({ events, isDark: _isDark 
                     href={event.sourceUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 py-2 rounded-xl bg-[#007AFF] hover:bg-[#0062CC] dark:bg-[#0A84FF] text-white font-semibold flex items-center gap-1.5 shadow-xs transition-colors shrink-0"
+                    className="px-4 py-2 rounded-xl bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-[var(--color-primary-fg)] font-semibold flex items-center gap-1.5 shadow-xs transition-colors shrink-0"
                   >
                     <span>Register / Learn More</span>
                     <ExternalLink className="w-3.5 h-3.5" />

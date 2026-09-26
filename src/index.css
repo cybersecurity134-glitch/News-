@@ -1,10 +1,20 @@
 @import "tailwindcss";
 @import "./styles/tokens.css";
 
+/* Zero Animations & Instant 175Hz Frame Budget (<5.7ms per frame)
+   Completely removes transitions, keyframe animations, and synthetic lag */
+*, *::before, *::after {
+  animation: none !important;
+  animation-duration: 0s !important;
+  animation-iteration-count: 1 !important;
+  transition: none !important;
+  transition-duration: 0s !important;
+}
+
 @layer base {
   html {
-    scroll-behavior: smooth;
-    text-rendering: optimizeLegibility;
+    scroll-behavior: auto !important;
+    text-rendering: optimizeSpeed;
   }
   html, body {
     min-height: 100dvh;
@@ -73,10 +83,10 @@
 }
 
 /* ==============================================================
-   CLASSIC PREMIUM GLASSMORPHISM & CARD SYSTEM
+   CLASSIC PREMIUM GLASSMORPHISM & CARD SYSTEM (ZERO ANIMATION)
    ============================================================== */
 
-/* Level 1: Ambient mesh canvas background */
+/* Level 1: Ambient mesh canvas background - completely static to avoid raster repaint */
 .ambient-glow-mesh {
   position: fixed;
   inset: 0;
@@ -91,52 +101,34 @@
 .ambient-node {
   position: absolute;
   border-radius: 9999px;
-  filter: blur(100px);
-  opacity: 0.6;
-  transition: opacity 600ms ease;
-  will-change: transform;
-  transform: translateZ(0);
+  filter: blur(40px);
+  opacity: 0.35;
+  transform: translate3d(0, 0, 0);
+  contain: paint;
 }
 
 [data-theme="dark"] .ambient-node {
-  opacity: 0.35;
+  opacity: 0.22;
 }
 
-/* Level 2: Glass Card (Refined, classic, readable, 144Hz smooth) */
+/* Level 2: Glass Card (Optimized for stable 175Hz frame budget ~5.7ms) */
 .liquid-glass-card {
   background: var(--glass-card-bg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--glass-card-border);
   box-shadow: var(--glass-card-shadow), var(--glass-card-highlight);
   border-radius: 16px;
-  transform: translateZ(0);
-  will-change: transform;
-  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 180ms ease,
-              background-color 180ms ease,
-              border-color 180ms ease;
+  content-visibility: auto;
+  contain-intrinsic-size: 0 260px;
+  contain: layout style paint;
 }
 
 .liquid-glass-card:hover {
   background: var(--glass-card-hover-bg);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px -4px rgba(15, 23, 42, 0.08), var(--glass-card-highlight);
-}
-
-[data-theme="dark"] .liquid-glass-card:hover {
-  box-shadow: 0 12px 28px -4px rgba(0, 0, 0, 0.5), var(--glass-card-highlight);
-}
-
-.liquid-glass-card:active {
-  transform: scale(0.99);
 }
 
 /* Level 3: Floating Nav & Bars */
 .liquid-glass-nav {
   background: var(--glass-nav-bg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--glass-nav-border);
   box-shadow: var(--glass-nav-shadow);
 }
@@ -144,8 +136,6 @@
 /* Level 4: Sheets, Modals, Overlays */
 .liquid-glass-modal {
   background: var(--glass-modal-bg);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
   border: 1px solid var(--glass-modal-border);
   box-shadow: var(--glass-modal-shadow);
 }
@@ -153,33 +143,27 @@
 /* Level 5: Glass Controls & Inputs */
 .liquid-glass-input {
   background: var(--glass-input-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--glass-input-border);
   color: var(--color-text-primary);
-  transition: all 180ms ease;
 }
 .liquid-glass-input:focus {
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px var(--color-primary-subtle);
+  box-shadow: 0 0 0 2px var(--color-primary-subtle);
   outline: none;
 }
 
-/* Classic Button System */
+/* Classic Button System - instant response, zero delay */
 .btn-classic-primary {
   background-color: var(--color-primary);
   color: var(--color-primary-fg);
   font-weight: 700;
-  transition: all 180ms cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: 0 2px 8px -1px var(--color-primary-glow);
 }
 .btn-classic-primary:hover:not(:disabled) {
   background-color: var(--color-primary-hover);
-  box-shadow: 0 4px 14px -1px var(--color-primary-glow);
-  transform: translateY(-1px);
 }
 .btn-classic-primary:active:not(:disabled) {
-  transform: scale(0.98);
+  opacity: 0.92;
 }
 
 .btn-classic-secondary {
@@ -187,14 +171,13 @@
   color: var(--color-text-secondary);
   border: 1px solid var(--color-border);
   font-weight: 600;
-  transition: all 180ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 .btn-classic-secondary:hover:not(:disabled) {
   background-color: var(--color-border-subtle);
   color: var(--color-text-primary);
 }
 .btn-classic-secondary:active:not(:disabled) {
-  transform: scale(0.98);
+  opacity: 0.92;
 }
 
 /* Section Specific Badges */
@@ -239,6 +222,63 @@
   border: 1px solid var(--sec-problems-border);
 }
 
+/* Category Card Accent Borders & Ambient Hover Effects */
+.card-accent-top-news {
+  border-top: 3px solid var(--sec-news);
+}
+.card-accent-top-news:hover {
+  box-shadow: 0 12px 28px -4px var(--sec-news-glow), var(--glass-card-highlight);
+}
+
+.card-accent-top-startups {
+  border-top: 3px solid var(--sec-startups);
+}
+.card-accent-top-startups:hover {
+  box-shadow: 0 12px 28px -4px var(--sec-startups-glow), var(--glass-card-highlight);
+}
+
+.card-accent-top-funding {
+  border-top: 3px solid var(--sec-funding);
+}
+.card-accent-top-funding:hover {
+  box-shadow: 0 12px 28px -4px var(--sec-funding-glow), var(--glass-card-highlight);
+}
+
+.card-accent-top-schemes {
+  border-top: 3px solid var(--sec-schemes);
+}
+.card-accent-top-schemes:hover {
+  box-shadow: 0 12px 28px -4px var(--sec-schemes-glow), var(--glass-card-highlight);
+}
+
+.card-accent-top-investors {
+  border-top: 3px solid var(--sec-investors);
+}
+.card-accent-top-investors:hover {
+  box-shadow: 0 12px 28px -4px var(--sec-investors-glow), var(--glass-card-highlight);
+}
+
+.card-accent-top-grants {
+  border-top: 3px solid var(--sec-grants);
+}
+.card-accent-top-grants:hover {
+  box-shadow: 0 12px 28px -4px var(--sec-grants-glow), var(--glass-card-highlight);
+}
+
+.card-accent-top-events {
+  border-top: 3px solid var(--sec-events);
+}
+.card-accent-top-events:hover {
+  box-shadow: 0 12px 28px -4px var(--sec-events-glow), var(--glass-card-highlight);
+}
+
+.card-accent-top-problems {
+  border-top: 3px solid var(--sec-problems);
+}
+.card-accent-top-problems:hover {
+  box-shadow: 0 12px 28px -4px var(--sec-problems-glow), var(--glass-card-highlight);
+}
+
 /* Semantic Badges */
 .badge-success {
   background-color: var(--color-success-bg);
@@ -261,13 +301,9 @@
   border: 1px solid var(--color-info-border);
 }
 
-/* Subtle Press State */
-.interactive-press {
-  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1), opacity 180ms ease;
-}
+/* Subtle Press State (zero delay) */
 .interactive-press:active {
-  transform: scale(0.97);
-  opacity: 0.94;
+  opacity: 0.92;
 }
 
 /* Specular reflection line */
@@ -286,55 +322,15 @@
   pointer-events: none;
 }
 
-
-/* Animations */
-@keyframes fadeInScale {
-  0% {
-    opacity: 0;
-    transform: scale(0.96) translateY(6px);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
+/* Shimmer placeholder static fallbacks (zero CPU/GPU cycle drain) */
+.shimmer-skeleton {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-surface-muted);
+  border-radius: 8px;
 }
 
-@keyframes pulseSubtle {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.75;
-    transform: scale(1.04);
-  }
-}
-
-@keyframes floatAmbient {
-  0%, 100% {
-    transform: translate(0, 0);
-  }
-  33% {
-    transform: translate(18px, -24px);
-  }
-  66% {
-    transform: translate(-14px, 16px);
-  }
-}
-
-.animate-fade-in {
-  animation: fadeInScale 260ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.animate-pulse-subtle {
-  animation: pulseSubtle 2.2s infinite ease-in-out;
-}
-
-.animate-float-slow {
-  animation: floatAmbient 18s infinite ease-in-out;
-}
-
-/* Custom scrollbars that feel like iOS */
+/* Custom scrollbars */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -350,21 +346,3 @@
   background: rgba(148, 163, 184, 0.6);
 }
 
-/* Reduced motion preference */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-  .liquid-glass-card:hover {
-    transform: none !important;
-  }
-  .interactive-press:active {
-    transform: none !important;
-  }
-  .animate-float-slow {
-    animation: none !important;
-  }
-}

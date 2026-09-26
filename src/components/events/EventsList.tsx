@@ -58,7 +58,7 @@ export const EventsList: React.FC<EventsListProps> = ({ events, isLoading }) => 
               onClick={() => setFilter(mode)}
               className={`px-3.5 py-1 rounded-full text-xs font-semibold capitalize transition-all ${
                 filter === mode
-                  ? 'bg-[var(--color-accent)] text-[#0B1F3A] shadow-xs'
+                  ? 'bg-[var(--color-accent)] text-[var(--color-accent-fg)] shadow-xs'
                   : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]'
               }`}
             >

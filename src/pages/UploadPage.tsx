@@ -59,7 +59,7 @@ export const UploadPage: React.FC = () => {
               onClick={() => setSubTab('form')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 subTab === 'form'
-                  ? 'bg-white dark:bg-[#1C1C1E] text-[var(--color-text-primary)] shadow-xs'
+                  ? 'bg-[var(--color-surface-elevated)] text-[var(--color-text-primary)] shadow-xs'
                   : 'text-[var(--color-text-secondary)]'
               }`}
             >
@@ -70,7 +70,7 @@ export const UploadPage: React.FC = () => {
               onClick={() => setSubTab('submissions')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 subTab === 'submissions'
-                  ? 'bg-white dark:bg-[#1C1C1E] text-[var(--color-text-primary)] shadow-xs'
+                  ? 'bg-[var(--color-surface-elevated)] text-[var(--color-text-primary)] shadow-xs'
                   : 'text-[var(--color-text-secondary)]'
               }`}
             >

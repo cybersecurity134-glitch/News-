@@ -76,11 +76,11 @@ export const NotificationsDropdown: React.FC<NotificationsDropdownProps> = ({
             userNotifs.map((notif) => {
               const icon =
                 notif.type === 'chat' ? (
-                  <MessageSquare className="w-4 h-4 text-[#007AFF]" />
+                  <MessageSquare className="w-4 h-4 text-[var(--color-primary)]" />
                 ) : notif.type === 'news_approved' ? (
-                  <CheckCircle className="w-4 h-4 text-emerald-500" />
+                  <CheckCircle className="w-4 h-4 text-[var(--color-success)]" />
                 ) : (
-                  <Shield className="w-4 h-4 text-purple-500" />
+                  <Shield className="w-4 h-4 text-[var(--color-accent)]" />
                 );
 
               return (
@@ -91,7 +91,7 @@ export const NotificationsDropdown: React.FC<NotificationsDropdownProps> = ({
                     onClose();
                   }}
                   className={`p-3.5 flex items-start gap-3 hover:bg-black/[0.02] dark:hover:bg-white/[0.03] cursor-pointer transition-colors ${
-                    !notif.read ? 'bg-[#007AFF]/5 dark:bg-[#0A84FF]/10' : ''
+                    !notif.read ? 'bg-[var(--color-primary-subtle)]' : ''
                   }`}
                 >
                   <div className="p-2 rounded-xl bg-black/[0.04] dark:bg-white/[0.06] shrink-0 mt-0.5">
@@ -100,21 +100,21 @@ export const NotificationsDropdown: React.FC<NotificationsDropdownProps> = ({
 
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between gap-1">
-                      <h4 className="font-semibold text-xs text-[#000000] dark:text-[#FFFFFF] truncate">
+                      <h4 className="font-semibold text-xs text-[var(--color-text-primary)] truncate">
                         {notif.title}
                       </h4>
-                      <span className="text-[10px] text-[rgba(60,60,67,0.5)] shrink-0">
+                      <span className="text-[10px] text-[var(--color-text-tertiary)] shrink-0">
                         {formatTimeAgo(notif.createdAt)}
                       </span>
                     </div>
 
-                    <p className="text-xs text-[rgba(60,60,67,0.7)] dark:text-[rgba(235,235,245,0.7)] line-clamp-2 mt-0.5">
+                    <p className="text-xs text-[var(--color-text-secondary)] line-clamp-2 mt-0.5">
                       {notif.body}
                     </p>
                   </div>
 
                   {!notif.read && (
-                    <span className="w-2 h-2 rounded-full bg-[#007AFF] shrink-0 mt-1.5" />
+                    <span className="w-2 h-2 rounded-full bg-[var(--color-primary)] shrink-0 mt-1.5" />
                   )}
                 </div>
               );

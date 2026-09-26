@@ -4,37 +4,50 @@
  */
 
 :root {
-  /* Classic Editorial Typographic Stack */
-  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro", "Inter", -apple-system, Roboto, sans-serif;
-  --font-body: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro", "Inter", -apple-system, Roboto, sans-serif;
-  --font-serif: "Newsreader", "Charter", "Georgia", serif;
-  --font-mono: "SF Mono", Menlo, Monaco, Consolas, monospace;
+  /* ==============================================================
+     CLASSIC EDITORIAL & EXECUTIVE TYPOGRAPHY
+     ============================================================== */
+  --font-display: "Playfair Display", "Newsreader", "Charter", Georgia, serif;
+  --font-body: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", sans-serif;
+  --font-serif: "Playfair Display", "Newsreader", "Charter", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", Menlo, Monaco, Consolas, monospace;
 
   /* ==============================================================
-     LIGHT THEME — CLASSIC EDITORIAL & PROFESSIONAL PALETTE
+     BASE LIGHT THEME — CLASSIC EDITORIAL & PROFESSIONAL CANVAS
      ============================================================== */
-  /* Neutral Canvas & Surfaces */
-  --color-bg: #F8FAFC;
-  --color-bg-subtle: #F1F5F9;
+  --color-background: #F4F7FB;
+  --color-bg: #F4F7FB;
+  --color-bg-subtle: #EBF1F8;
   --color-surface: rgba(255, 255, 255, 0.88);
   --color-surface-hover: rgba(255, 255, 255, 0.98);
   --color-surface-elevated: #FFFFFF;
   --color-surface-muted: #F8FAFC;
 
-  /* Ambient Canvas Glows (Subtle, Restrained Editorial Tones) */
-  --bg-ambient-1: rgba(30, 64, 175, 0.05);
-  --bg-ambient-2: rgba(217, 119, 6, 0.04);
-  --bg-ambient-3: rgba(5, 150, 105, 0.04);
+  /* Ambient Canvas Glows (Multi-tonal Luminous Blooms) */
+  --bg-ambient-1: rgba(30, 64, 175, 0.08);
+  --bg-ambient-2: rgba(217, 119, 6, 0.06);
+  --bg-ambient-3: rgba(5, 150, 105, 0.06);
+  --bg-ambient-4: rgba(124, 58, 237, 0.05);
 
-  /* Primary Brand: Classic Royal Sapphire */
+  /* Primary Brand & Accent Tokens (Default: Royal Sapphire) */
+  --color-accent: #1E40AF;
+  --color-accent-hover: #1D4ED8;
+  --color-accent-light: #3B82F6;
+  --color-accent-dark: #1E3A8A;
+  --color-accent-subtle: rgba(30, 64, 175, 0.09);
+  --color-accent-border: rgba(30, 64, 175, 0.24);
+  --color-accent-fg: #FFFFFF;
+  --color-accent-glow: rgba(30, 64, 175, 0.22);
+
   --color-primary: #1E40AF;
   --color-primary-hover: #1D4ED8;
   --color-primary-light: #3B82F6;
   --color-primary-dark: #1E3A8A;
-  --color-primary-subtle: rgba(30, 64, 175, 0.08);
-  --color-primary-border: rgba(30, 64, 175, 0.22);
+  --color-primary-subtle: rgba(30, 64, 175, 0.09);
+  --color-primary-border: rgba(30, 64, 175, 0.24);
   --color-primary-fg: #FFFFFF;
-  --color-primary-glow: rgba(30, 64, 175, 0.16);
+  --color-primary-glow: rgba(30, 64, 175, 0.22);
 
   /* Secondary Neutral Action: Charcoal Slate */
   --color-secondary: #475569;
@@ -55,75 +68,85 @@
 
   /* Semantic Status Tokens */
   --color-success: #15803D;
-  --color-success-bg: rgba(21, 128, 61, 0.08);
-  --color-success-border: rgba(21, 128, 61, 0.22);
+  --color-success-bg: rgba(21, 128, 61, 0.09);
+  --color-success-border: rgba(21, 128, 61, 0.24);
   --color-success-fg: #15803D;
 
   --color-warning: #B45309;
-  --color-warning-bg: rgba(180, 83, 9, 0.08);
-  --color-warning-border: rgba(180, 83, 9, 0.22);
+  --color-warning-bg: rgba(180, 83, 9, 0.09);
+  --color-warning-border: rgba(180, 83, 9, 0.24);
   --color-warning-fg: #B45309;
 
   --color-error: #DC2626;
-  --color-error-bg: rgba(220, 38, 38, 0.08);
-  --color-error-border: rgba(220, 38, 38, 0.22);
+  --color-error-bg: rgba(220, 38, 38, 0.09);
+  --color-error-border: rgba(220, 38, 38, 0.24);
   --color-error-fg: #DC2626;
 
   --color-info: #0284C7;
-  --color-info-bg: rgba(2, 132, 199, 0.08);
-  --color-info-border: rgba(2, 132, 199, 0.22);
+  --color-info-bg: rgba(2, 132, 199, 0.09);
+  --color-info-border: rgba(2, 132, 199, 0.24);
   --color-info-fg: #0284C7;
 
-  /* Section-Specific Meaningful Color Palette (Light) */
+  /* ==============================================================
+     VIBRANT JEWEL SECTION ACCENTS (Colourful, Classic, Distinguished)
+     ============================================================== */
   --sec-news: #1E40AF;
-  --sec-news-subtle: rgba(30, 64, 175, 0.08);
-  --sec-news-border: rgba(30, 64, 175, 0.22);
+  --sec-news-subtle: rgba(30, 64, 175, 0.09);
+  --sec-news-border: rgba(30, 64, 175, 0.26);
+  --sec-news-glow: rgba(30, 64, 175, 0.20);
 
-  --sec-startups: #6D28D9;
-  --sec-startups-subtle: rgba(109, 40, 217, 0.08);
-  --sec-startups-border: rgba(109, 40, 217, 0.22);
+  --sec-startups: #7C3AED;
+  --sec-startups-subtle: rgba(124, 58, 237, 0.09);
+  --sec-startups-border: rgba(124, 58, 237, 0.26);
+  --sec-startups-glow: rgba(124, 58, 237, 0.20);
 
-  --sec-funding: #047857;
-  --sec-funding-subtle: rgba(4, 120, 87, 0.08);
-  --sec-funding-border: rgba(4, 120, 87, 0.22);
+  --sec-funding: #059669;
+  --sec-funding-subtle: rgba(5, 150, 105, 0.09);
+  --sec-funding-border: rgba(5, 150, 105, 0.26);
+  --sec-funding-glow: rgba(5, 150, 105, 0.20);
 
-  --sec-schemes: #B45309;
-  --sec-schemes-subtle: rgba(180, 83, 9, 0.08);
-  --sec-schemes-border: rgba(180, 83, 9, 0.22);
+  --sec-schemes: #D97706;
+  --sec-schemes-subtle: rgba(217, 119, 6, 0.09);
+  --sec-schemes-border: rgba(217, 119, 6, 0.26);
+  --sec-schemes-glow: rgba(217, 119, 6, 0.20);
 
-  --sec-investors: #4338CA;
-  --sec-investors-subtle: rgba(67, 56, 202, 0.08);
-  --sec-investors-border: rgba(67, 56, 202, 0.22);
+  --sec-investors: #4F46E5;
+  --sec-investors-subtle: rgba(79, 70, 229, 0.09);
+  --sec-investors-border: rgba(79, 70, 229, 0.26);
+  --sec-investors-glow: rgba(79, 70, 229, 0.20);
 
-  --sec-grants: #D97706;
-  --sec-grants-subtle: rgba(217, 119, 6, 0.08);
-  --sec-grants-border: rgba(217, 119, 6, 0.22);
+  --sec-grants: #0D9488;
+  --sec-grants-subtle: rgba(13, 148, 136, 0.09);
+  --sec-grants-border: rgba(13, 148, 136, 0.26);
+  --sec-grants-glow: rgba(13, 148, 136, 0.20);
 
-  --sec-events: #C2410C;
-  --sec-events-subtle: rgba(194, 65, 12, 0.08);
-  --sec-events-border: rgba(194, 65, 12, 0.22);
+  --sec-events: #EA580C;
+  --sec-events-subtle: rgba(234, 88, 12, 0.09);
+  --sec-events-border: rgba(234, 88, 12, 0.26);
+  --sec-events-glow: rgba(234, 88, 12, 0.20);
 
-  --sec-problems: #B91C1C;
-  --sec-problems-subtle: rgba(185, 28, 28, 0.08);
-  --sec-problems-border: rgba(185, 28, 28, 0.22);
+  --sec-problems: #E11D48;
+  --sec-problems-subtle: rgba(225, 29, 72, 0.09);
+  --sec-problems-border: rgba(225, 29, 72, 0.26);
+  --sec-problems-glow: rgba(225, 29, 72, 0.20);
 
-  /* Glassmorphism Levels — Refined, Subtle, Classic */
-  --glass-nav-bg: rgba(255, 255, 255, 0.86);
+  /* Glassmorphism Levels — Refined, Classic, Crystal Clarity */
+  --glass-nav-bg: rgba(255, 255, 255, 0.88);
   --glass-nav-border: rgba(226, 232, 240, 0.85);
   --glass-nav-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.03);
 
-  --glass-card-bg: rgba(255, 255, 255, 0.82);
-  --glass-card-hover-bg: rgba(255, 255, 255, 0.96);
+  --glass-card-bg: rgba(255, 255, 255, 0.85);
+  --glass-card-hover-bg: rgba(255, 255, 255, 0.98);
   --glass-card-border: rgba(226, 232, 240, 0.85);
-  --glass-card-highlight: inset 0 1px 0 0 rgba(255, 255, 255, 0.8);
-  --glass-card-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.04), 0 1px 3px 0 rgba(15, 23, 42, 0.02);
+  --glass-card-highlight: inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
+  --glass-card-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 1px 3px 0 rgba(15, 23, 42, 0.02);
 
-  --glass-modal-bg: rgba(255, 255, 255, 0.94);
+  --glass-modal-bg: rgba(255, 255, 255, 0.95);
   --glass-modal-border: rgba(226, 232, 240, 0.9);
-  --glass-modal-shadow: 0 20px 48px -8px rgba(15, 23, 42, 0.12), 0 8px 16px -4px rgba(15, 23, 42, 0.06);
+  --glass-modal-shadow: 0 20px 48px -8px rgba(15, 23, 42, 0.14), 0 8px 16px -4px rgba(15, 23, 42, 0.06);
 
-  --glass-input-bg: rgba(255, 255, 255, 0.75);
-  --glass-input-border: rgba(203, 213, 225, 0.8);
+  --glass-input-bg: rgba(255, 255, 255, 0.8);
+  --glass-input-border: rgba(203, 213, 225, 0.85);
 
   /* Radii */
   --radius-sm: 8px;
@@ -132,18 +155,27 @@
   --radius-xl: 20px;
   --radius-full: 9999px;
 
-  /* Backwards-Compatible Legacy Mapping */
+  /* First-Class Design Tokens & Legacy Backward-Compatibility */
+  --color-accent: var(--color-primary);
+  --color-accent-hover: var(--color-primary-hover);
+  --color-accent-light: var(--color-primary-light);
+  --color-accent-dark: var(--color-primary-dark);
+  --color-accent-subtle: var(--color-primary-subtle);
+  --color-accent-border: var(--color-primary-border);
+  --color-accent-glow: var(--color-primary-glow);
+  --color-accent-fg: var(--color-primary-fg);
+  --color-background: var(--color-bg);
+  --color-separator: var(--color-border);
   --bg-base: var(--color-bg);
   --text-primary: var(--color-text-primary);
   --text-secondary: var(--color-text-secondary);
   --text-tertiary: var(--color-text-tertiary);
   --border-subtle: var(--color-border-subtle);
-
   --accent-primary: var(--color-primary);
   --accent-primary-hover: var(--color-primary-hover);
   --accent-glow: var(--color-primary-glow);
   --accent-indigo: var(--sec-investors);
-  --accent-teal: var(--sec-funding);
+  --accent-teal: var(--sec-grants);
   --accent-emerald: var(--sec-funding);
   --accent-coral: var(--sec-events);
   --accent-amber: var(--sec-schemes);
@@ -151,134 +183,166 @@
   --accent-blue: var(--sec-news);
 }
 
+/* ==============================================================
+   FONT STYLE SWITCHING
+   ============================================================== */
+[data-font="classic-editorial"] {
+  --font-display: "Playfair Display", "Newsreader", "Charter", Georgia, serif;
+  --font-body: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+}
+
+[data-font="executive-sans"] {
+  --font-display: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+  --font-body: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+}
+
+/* ==============================================================
+   DARK THEME BASE
+   ============================================================== */
 [data-theme="dark"] {
-  /* ==============================================================
-     DARK THEME — CLASSIC REFINED OBSIDIAN & MIDNIGHT PALETTE
-     ============================================================== */
-  /* Neutral Canvas & Surfaces */
-  --color-bg: #0B0F19;
-  --color-bg-subtle: #111827;
-  --color-surface: rgba(17, 24, 39, 0.85);
-  --color-surface-hover: rgba(24, 34, 53, 0.95);
-  --color-surface-elevated: #111827;
-  --color-surface-muted: #1F2937;
+  --color-background: #070B14;
+  --color-bg: #070B14;
+  --color-bg-subtle: #0D1527;
+  --color-surface: rgba(13, 21, 39, 0.85);
+  --color-surface-hover: rgba(20, 32, 58, 0.95);
+  --color-surface-elevated: #0F1A30;
+  --color-surface-muted: #162442;
 
-  /* Ambient Canvas Glows (Deep, Restrained Midnight Tones) */
-  --bg-ambient-1: rgba(30, 58, 138, 0.08);
-  --bg-ambient-2: rgba(180, 83, 9, 0.05);
-  --bg-ambient-3: rgba(4, 120, 87, 0.05);
+  --bg-ambient-1: rgba(30, 58, 138, 0.16);
+  --bg-ambient-2: rgba(180, 83, 9, 0.10);
+  --bg-ambient-3: rgba(4, 120, 87, 0.10);
+  --bg-ambient-4: rgba(109, 40, 217, 0.10);
 
-  /* Primary Brand: Electric Sapphire */
+  --color-accent: #3B82F6;
+  --color-accent-hover: #60A5FA;
+  --color-accent-light: #93C5FD;
+  --color-accent-dark: #1D4ED8;
+  --color-accent-subtle: rgba(59, 130, 246, 0.16);
+  --color-accent-border: rgba(59, 130, 246, 0.32);
+  --color-accent-fg: #FFFFFF;
+  --color-accent-glow: rgba(59, 130, 246, 0.30);
+
   --color-primary: #3B82F6;
   --color-primary-hover: #60A5FA;
   --color-primary-light: #93C5FD;
   --color-primary-dark: #1D4ED8;
-  --color-primary-subtle: rgba(59, 130, 246, 0.14);
-  --color-primary-border: rgba(59, 130, 246, 0.28);
+  --color-primary-subtle: rgba(59, 130, 246, 0.16);
+  --color-primary-border: rgba(59, 130, 246, 0.32);
   --color-primary-fg: #FFFFFF;
-  --color-primary-glow: rgba(59, 130, 246, 0.25);
+  --color-primary-glow: rgba(59, 130, 246, 0.30);
 
-  /* Secondary Neutral Action: Soft Slate */
   --color-secondary: #94A3B8;
   --color-secondary-hover: #CBD5E1;
   --color-secondary-subtle: rgba(148, 163, 184, 0.12);
   --color-secondary-border: rgba(148, 163, 184, 0.2);
 
-  /* Text & Content Hierarchy */
   --color-text-primary: #F8FAFC;
   --color-text-secondary: #CBD5E1;
   --color-text-tertiary: #94A3B8;
   --color-text-inverse: #0F172A;
 
-  /* Subtle Dark Borders */
-  --color-border: rgba(255, 255, 255, 0.09);
-  --color-border-subtle: rgba(255, 255, 255, 0.07);
-  --color-border-strong: rgba(255, 255, 255, 0.18);
+  --color-border: rgba(255, 255, 255, 0.10);
+  --color-border-subtle: rgba(255, 255, 255, 0.08);
+  --color-border-strong: rgba(255, 255, 255, 0.20);
 
-  /* Semantic Status Tokens (Dark) */
   --color-success: #22C55E;
-  --color-success-bg: rgba(34, 197, 94, 0.12);
-  --color-success-border: rgba(34, 197, 94, 0.25);
+  --color-success-bg: rgba(34, 197, 94, 0.14);
+  --color-success-border: rgba(34, 197, 94, 0.30);
   --color-success-fg: #22C55E;
 
   --color-warning: #F59E0B;
-  --color-warning-bg: rgba(245, 158, 11, 0.12);
-  --color-warning-border: rgba(245, 158, 11, 0.25);
+  --color-warning-bg: rgba(245, 158, 11, 0.14);
+  --color-warning-border: rgba(245, 158, 11, 0.30);
   --color-warning-fg: #F59E0B;
 
   --color-error: #EF4444;
-  --color-error-bg: rgba(239, 68, 68, 0.12);
-  --color-error-border: rgba(239, 68, 68, 0.25);
+  --color-error-bg: rgba(239, 68, 68, 0.14);
+  --color-error-border: rgba(239, 68, 68, 0.30);
   --color-error-fg: #EF4444;
 
   --color-info: #38BDF8;
-  --color-info-bg: rgba(56, 189, 248, 0.12);
-  --color-info-border: rgba(56, 189, 248, 0.25);
+  --color-info-bg: rgba(56, 189, 248, 0.14);
+  --color-info-border: rgba(56, 189, 248, 0.30);
   --color-info-fg: #38BDF8;
 
-  /* Section-Specific Meaningful Color Palette (Dark) */
   --sec-news: #60A5FA;
-  --sec-news-subtle: rgba(96, 165, 250, 0.12);
-  --sec-news-border: rgba(96, 165, 250, 0.25);
+  --sec-news-subtle: rgba(96, 165, 250, 0.14);
+  --sec-news-border: rgba(96, 165, 250, 0.30);
+  --sec-news-glow: rgba(96, 165, 250, 0.25);
 
   --sec-startups: #A78BFA;
-  --sec-startups-subtle: rgba(167, 139, 250, 0.12);
-  --sec-startups-border: rgba(167, 139, 250, 0.25);
+  --sec-startups-subtle: rgba(167, 139, 250, 0.14);
+  --sec-startups-border: rgba(167, 139, 250, 0.30);
+  --sec-startups-glow: rgba(167, 139, 250, 0.25);
 
   --sec-funding: #34D399;
-  --sec-funding-subtle: rgba(52, 211, 153, 0.12);
-  --sec-funding-border: rgba(52, 211, 153, 0.25);
+  --sec-funding-subtle: rgba(52, 211, 153, 0.14);
+  --sec-funding-border: rgba(52, 211, 153, 0.30);
+  --sec-funding-glow: rgba(52, 211, 153, 0.25);
 
   --sec-schemes: #FBBF24;
-  --sec-schemes-subtle: rgba(251, 191, 36, 0.12);
-  --sec-schemes-border: rgba(251, 191, 36, 0.25);
+  --sec-schemes-subtle: rgba(251, 191, 36, 0.14);
+  --sec-schemes-border: rgba(251, 191, 36, 0.30);
+  --sec-schemes-glow: rgba(251, 191, 36, 0.25);
 
   --sec-investors: #818CF8;
-  --sec-investors-subtle: rgba(129, 140, 248, 0.12);
-  --sec-investors-border: rgba(129, 140, 248, 0.25);
+  --sec-investors-subtle: rgba(129, 140, 248, 0.14);
+  --sec-investors-border: rgba(129, 140, 248, 0.30);
+  --sec-investors-glow: rgba(129, 140, 248, 0.25);
 
-  --sec-grants: #F59E0B;
-  --sec-grants-subtle: rgba(245, 158, 11, 0.12);
-  --sec-grants-border: rgba(245, 158, 11, 0.25);
+  --sec-grants: #2DD4BF;
+  --sec-grants-subtle: rgba(45, 212, 191, 0.14);
+  --sec-grants-border: rgba(45, 212, 191, 0.30);
+  --sec-grants-glow: rgba(45, 212, 191, 0.25);
 
   --sec-events: #FB923C;
-  --sec-events-subtle: rgba(251, 146, 60, 0.12);
-  --sec-events-border: rgba(251, 146, 60, 0.25);
+  --sec-events-subtle: rgba(251, 146, 60, 0.14);
+  --sec-events-border: rgba(251, 146, 60, 0.30);
+  --sec-events-glow: rgba(251, 146, 60, 0.25);
 
-  --sec-problems: #F87171;
-  --sec-problems-subtle: rgba(248, 113, 113, 0.12);
-  --sec-problems-border: rgba(248, 113, 113, 0.25);
+  --sec-problems: #FB7185;
+  --sec-problems-subtle: rgba(251, 113, 133, 0.14);
+  --sec-problems-border: rgba(251, 113, 133, 0.30);
+  --sec-problems-glow: rgba(251, 113, 133, 0.25);
 
-  /* Glassmorphism Levels — Dark */
-  --glass-nav-bg: rgba(17, 24, 39, 0.88);
-  --glass-nav-border: rgba(255, 255, 255, 0.09);
-  --glass-nav-shadow: 0 8px 28px -4px rgba(0, 0, 0, 0.5), 0 2px 8px -2px rgba(0, 0, 0, 0.3);
+  --glass-nav-bg: rgba(13, 21, 39, 0.88);
+  --glass-nav-border: rgba(255, 255, 255, 0.10);
+  --glass-nav-shadow: 0 8px 30px -4px rgba(0, 0, 0, 0.6), 0 2px 8px -2px rgba(0, 0, 0, 0.4);
 
-  --glass-card-bg: rgba(17, 24, 39, 0.82);
-  --glass-card-hover-bg: rgba(24, 34, 53, 0.94);
-  --glass-card-border: rgba(255, 255, 255, 0.08);
-  --glass-card-highlight: inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
-  --glass-card-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.45), 0 2px 6px -2px rgba(0, 0, 0, 0.25);
+  --glass-card-bg: rgba(13, 21, 39, 0.84);
+  --glass-card-hover-bg: rgba(20, 32, 58, 0.95);
+  --glass-card-border: rgba(255, 255, 255, 0.09);
+  --glass-card-highlight: inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
+  --glass-card-shadow: 0 8px 26px -4px rgba(0, 0, 0, 0.5), 0 2px 6px -2px rgba(0, 0, 0, 0.3);
 
-  --glass-modal-bg: rgba(17, 24, 39, 0.96);
-  --glass-modal-border: rgba(255, 255, 255, 0.12);
-  --glass-modal-shadow: 0 24px 60px -10px rgba(0, 0, 0, 0.7), 0 8px 20px -4px rgba(0, 0, 0, 0.4);
+  --glass-modal-bg: rgba(13, 21, 39, 0.96);
+  --glass-modal-border: rgba(255, 255, 255, 0.14);
+  --glass-modal-shadow: 0 24px 64px -10px rgba(0, 0, 0, 0.75), 0 8px 24px -4px rgba(0, 0, 0, 0.5);
 
-  --glass-input-bg: rgba(31, 41, 55, 0.65);
-  --glass-input-border: rgba(255, 255, 255, 0.12);
+  --glass-input-bg: rgba(22, 36, 66, 0.65);
+  --glass-input-border: rgba(255, 255, 255, 0.14);
 
-  /* Backwards-Compatible Legacy Mapping */
+  /* First-Class Design Tokens & Legacy Backward-Compatibility */
+  --color-accent: var(--color-primary);
+  --color-accent-hover: var(--color-primary-hover);
+  --color-accent-light: var(--color-primary-light);
+  --color-accent-dark: var(--color-primary-dark);
+  --color-accent-subtle: var(--color-primary-subtle);
+  --color-accent-border: var(--color-primary-border);
+  --color-accent-glow: var(--color-primary-glow);
+  --color-accent-fg: var(--color-primary-fg);
+  --color-background: var(--color-bg);
+  --color-separator: var(--color-border);
   --bg-base: var(--color-bg);
   --text-primary: var(--color-text-primary);
   --text-secondary: var(--color-text-secondary);
   --text-tertiary: var(--color-text-tertiary);
   --border-subtle: var(--color-border-subtle);
-
   --accent-primary: var(--color-primary);
   --accent-primary-hover: var(--color-primary-hover);
   --accent-glow: var(--color-primary-glow);
   --accent-indigo: var(--sec-investors);
-  --accent-teal: var(--sec-funding);
+  --accent-teal: var(--sec-grants);
   --accent-emerald: var(--sec-funding);
   --accent-coral: var(--sec-events);
   --accent-amber: var(--sec-schemes);
@@ -286,128 +350,223 @@
   --accent-blue: var(--sec-news);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    /* Neutral Canvas & Surfaces */
-    --color-bg: #0B0F19;
-    --color-bg-subtle: #111827;
-    --color-surface: rgba(17, 24, 39, 0.85);
-    --color-surface-hover: rgba(24, 34, 53, 0.95);
-    --color-surface-elevated: #111827;
-    --color-surface-muted: #1F2937;
+/* ==============================================================
+   CURATED PALETTE 1: ROYAL SAPPHIRE (Default Timeless Classic)
+   ============================================================== */
+[data-palette="royal"] {
+  --color-primary: #1E40AF;
+  --color-primary-hover: #1D4ED8;
+  --color-primary-light: #3B82F6;
+  --color-primary-dark: #172554;
+  --color-primary-subtle: rgba(30, 64, 175, 0.09);
+  --color-primary-border: rgba(30, 64, 175, 0.24);
+  --color-primary-glow: rgba(30, 64, 175, 0.22);
+  --bg-ambient-1: rgba(30, 64, 175, 0.08);
+  --bg-ambient-2: rgba(217, 119, 6, 0.06);
+  --bg-ambient-3: rgba(5, 150, 105, 0.06);
+  --bg-ambient-4: rgba(124, 58, 237, 0.05);
+}
+[data-theme="dark"][data-palette="royal"] {
+  --color-primary: #3B82F6;
+  --color-primary-hover: #60A5FA;
+  --color-primary-light: #93C5FD;
+  --color-primary-dark: #1D4ED8;
+  --color-primary-subtle: rgba(59, 130, 246, 0.16);
+  --color-primary-border: rgba(59, 130, 246, 0.32);
+  --color-primary-glow: rgba(59, 130, 246, 0.30);
+  --bg-ambient-1: rgba(59, 130, 246, 0.16);
+  --bg-ambient-2: rgba(245, 158, 11, 0.10);
+  --bg-ambient-3: rgba(16, 185, 129, 0.08);
+  --bg-ambient-4: rgba(167, 139, 250, 0.08);
+}
 
-    --bg-ambient-1: rgba(30, 58, 138, 0.08);
-    --bg-ambient-2: rgba(180, 83, 9, 0.05);
-    --bg-ambient-3: rgba(4, 120, 87, 0.05);
+/* ==============================================================
+   CURATED PALETTE 2: IMPERIAL EMERALD (High Venture & Prestige)
+   ============================================================== */
+[data-palette="emerald"] {
+  --color-primary: #047857;
+  --color-primary-hover: #065F46;
+  --color-primary-light: #10B981;
+  --color-primary-dark: #064E3B;
+  --color-primary-subtle: rgba(4, 120, 87, 0.09);
+  --color-primary-border: rgba(4, 120, 87, 0.25);
+  --color-primary-glow: rgba(4, 120, 87, 0.22);
+  --bg-ambient-1: rgba(4, 120, 87, 0.09);
+  --bg-ambient-2: rgba(180, 83, 9, 0.07);
+  --bg-ambient-3: rgba(13, 148, 136, 0.07);
+  --bg-ambient-4: rgba(30, 64, 175, 0.05);
+}
+[data-theme="dark"][data-palette="emerald"] {
+  --color-primary: #10B981;
+  --color-primary-hover: #34D399;
+  --color-primary-light: #6EE7B7;
+  --color-primary-dark: #047857;
+  --color-primary-subtle: rgba(16, 185, 129, 0.16);
+  --color-primary-border: rgba(16, 185, 129, 0.32);
+  --color-primary-glow: rgba(16, 185, 129, 0.30);
+  --bg-ambient-1: rgba(16, 185, 129, 0.16);
+  --bg-ambient-2: rgba(245, 158, 11, 0.10);
+  --bg-ambient-3: rgba(45, 212, 191, 0.09);
+  --bg-ambient-4: rgba(96, 165, 250, 0.08);
+}
 
-    --color-primary: #3B82F6;
-    --color-primary-hover: #60A5FA;
-    --color-primary-light: #93C5FD;
-    --color-primary-dark: #1D4ED8;
-    --color-primary-subtle: rgba(59, 130, 246, 0.14);
-    --color-primary-border: rgba(59, 130, 246, 0.28);
-    --color-primary-fg: #FFFFFF;
-    --color-primary-glow: rgba(59, 130, 246, 0.25);
+/* ==============================================================
+   CURATED PALETTE 3: ROYAL AMETHYST (Noble Violet & Orchid)
+   ============================================================== */
+[data-palette="amethyst"] {
+  --color-primary: #6D28D9;
+  --color-primary-hover: #5B21B6;
+  --color-primary-light: #8B5CF6;
+  --color-primary-dark: #4C1D95;
+  --color-primary-subtle: rgba(109, 40, 217, 0.09);
+  --color-primary-border: rgba(109, 40, 217, 0.25);
+  --color-primary-glow: rgba(109, 40, 217, 0.22);
+  --bg-ambient-1: rgba(109, 40, 217, 0.09);
+  --bg-ambient-2: rgba(225, 29, 72, 0.06);
+  --bg-ambient-3: rgba(79, 70, 229, 0.06);
+  --bg-ambient-4: rgba(217, 119, 6, 0.05);
+}
+[data-theme="dark"][data-palette="amethyst"] {
+  --color-primary: #A78BFA;
+  --color-primary-hover: #C4B5FD;
+  --color-primary-light: #DDD6FE;
+  --color-primary-dark: #7C3AED;
+  --color-primary-fg: #0B132B;
+  --color-accent-fg: #0B132B;
+  --color-primary-subtle: rgba(167, 139, 250, 0.16);
+  --color-primary-border: rgba(167, 139, 250, 0.32);
+  --color-primary-glow: rgba(167, 139, 250, 0.30);
+  --bg-ambient-1: rgba(167, 139, 250, 0.16);
+  --bg-ambient-2: rgba(251, 113, 133, 0.10);
+  --bg-ambient-3: rgba(129, 140, 248, 0.09);
+  --bg-ambient-4: rgba(251, 191, 36, 0.08);
+}
 
-    --color-secondary: #94A3B8;
-    --color-secondary-hover: #CBD5E1;
-    --color-secondary-subtle: rgba(148, 163, 184, 0.12);
-    --color-secondary-border: rgba(148, 163, 184, 0.2);
+/* ==============================================================
+   CURATED PALETTE 4: BORDEAUX CRIMSON (Classic FT/Harvard Wine)
+   ============================================================== */
+[data-palette="bordeaux"] {
+  --color-primary: #991B1B;
+  --color-primary-hover: #7F1D1D;
+  --color-primary-light: #DC2626;
+  --color-primary-dark: #450A0A;
+  --color-primary-subtle: rgba(153, 27, 27, 0.09);
+  --color-primary-border: rgba(153, 27, 27, 0.25);
+  --color-primary-glow: rgba(153, 27, 27, 0.22);
+  --bg-ambient-1: rgba(153, 27, 27, 0.09);
+  --bg-ambient-2: rgba(217, 119, 6, 0.07);
+  --bg-ambient-3: rgba(180, 83, 9, 0.06);
+  --bg-ambient-4: rgba(30, 64, 175, 0.05);
+}
+[data-theme="dark"][data-palette="bordeaux"] {
+  --color-primary: #F87171;
+  --color-primary-hover: #FCA5A5;
+  --color-primary-light: #FECACA;
+  --color-primary-dark: #B91C1C;
+  --color-primary-fg: #0B132B;
+  --color-accent-fg: #0B132B;
+  --color-primary-subtle: rgba(248, 113, 113, 0.16);
+  --color-primary-border: rgba(248, 113, 113, 0.32);
+  --color-primary-glow: rgba(248, 113, 113, 0.30);
+  --bg-ambient-1: rgba(248, 113, 113, 0.16);
+  --bg-ambient-2: rgba(245, 158, 11, 0.10);
+  --bg-ambient-3: rgba(251, 146, 60, 0.09);
+  --bg-ambient-4: rgba(167, 139, 250, 0.08);
+}
 
-    --color-text-primary: #F8FAFC;
-    --color-text-secondary: #CBD5E1;
-    --color-text-tertiary: #94A3B8;
-    --color-text-inverse: #0F172A;
+/* ==============================================================
+   CURATED PALETTE 5: OBSIDIAN CYAN (High-Contrast Modern Classic)
+   ============================================================== */
+[data-palette="obsidian"] {
+  --color-primary: #0369A1;
+  --color-primary-hover: #075985;
+  --color-primary-light: #0EA5E9;
+  --color-primary-dark: #0C4A6E;
+  --color-primary-subtle: rgba(3, 105, 161, 0.09);
+  --color-primary-border: rgba(3, 105, 161, 0.25);
+  --color-primary-glow: rgba(3, 105, 161, 0.22);
+  --bg-ambient-1: rgba(3, 105, 161, 0.09);
+  --bg-ambient-2: rgba(13, 148, 136, 0.07);
+  --bg-ambient-3: rgba(79, 70, 229, 0.06);
+  --bg-ambient-4: rgba(5, 150, 105, 0.05);
+}
+[data-theme="dark"][data-palette="obsidian"] {
+  --color-primary: #00E5FF;
+  --color-primary-hover: #38BDF8;
+  --color-primary-light: #7DD3FC;
+  --color-primary-dark: #0284C7;
+  --color-primary-fg: #070B14;
+  --color-accent-fg: #070B14;
+  --color-primary-subtle: rgba(0, 229, 255, 0.16);
+  --color-primary-border: rgba(0, 229, 255, 0.32);
+  --color-primary-glow: rgba(0, 229, 255, 0.30);
+  --bg-ambient-1: rgba(0, 229, 255, 0.16);
+  --bg-ambient-2: rgba(56, 189, 248, 0.10);
+  --bg-ambient-3: rgba(99, 102, 241, 0.09);
+  --bg-ambient-4: rgba(52, 211, 153, 0.08);
+}
 
-    --color-border: rgba(255, 255, 255, 0.09);
-    --color-border-subtle: rgba(255, 255, 255, 0.07);
-    --color-border-strong: rgba(255, 255, 255, 0.18);
+/* ==============================================================
+   CURATED PALETTE 6: SUNSET ORANGE (Vibrant Amber & Coral)
+   ============================================================== */
+[data-palette="orange"] {
+  --color-primary: #C2410C;
+  --color-primary-hover: #9A3412;
+  --color-primary-light: #EA580C;
+  --color-primary-dark: #7C2D12;
+  --color-primary-subtle: rgba(194, 65, 12, 0.09);
+  --color-primary-border: rgba(194, 65, 12, 0.25);
+  --color-primary-glow: rgba(194, 65, 12, 0.22);
+  --bg-ambient-1: rgba(194, 65, 12, 0.09);
+  --bg-ambient-2: rgba(217, 119, 6, 0.07);
+  --bg-ambient-3: rgba(225, 29, 72, 0.06);
+  --bg-ambient-4: rgba(79, 70, 229, 0.05);
+}
+[data-theme="dark"][data-palette="orange"] {
+  --color-primary: #FB923C;
+  --color-primary-hover: #FDBA74;
+  --color-primary-light: #FED7AA;
+  --color-primary-dark: #EA580C;
+  --color-primary-fg: #0B132B;
+  --color-accent-fg: #0B132B;
+  --color-primary-subtle: rgba(251, 146, 60, 0.16);
+  --color-primary-border: rgba(251, 146, 60, 0.32);
+  --color-primary-glow: rgba(251, 146, 60, 0.30);
+  --bg-ambient-1: rgba(251, 146, 60, 0.16);
+  --bg-ambient-2: rgba(245, 158, 11, 0.10);
+  --bg-ambient-3: rgba(251, 113, 133, 0.09);
+  --bg-ambient-4: rgba(167, 139, 250, 0.08);
+}
 
-    --color-success: #22C55E;
-    --color-success-bg: rgba(34, 197, 94, 0.12);
-    --color-success-border: rgba(34, 197, 94, 0.25);
-    --color-success-fg: #22C55E;
-
-    --color-warning: #F59E0B;
-    --color-warning-bg: rgba(245, 158, 11, 0.12);
-    --color-warning-border: rgba(245, 158, 11, 0.25);
-    --color-warning-fg: #F59E0B;
-
-    --color-error: #EF4444;
-    --color-error-bg: rgba(239, 68, 68, 0.12);
-    --color-error-border: rgba(239, 68, 68, 0.25);
-    --color-error-fg: #EF4444;
-
-    --color-info: #38BDF8;
-    --color-info-bg: rgba(56, 189, 248, 0.12);
-    --color-info-border: rgba(56, 189, 248, 0.25);
-    --color-info-fg: #38BDF8;
-
-    --sec-news: #60A5FA;
-    --sec-news-subtle: rgba(96, 165, 250, 0.12);
-    --sec-news-border: rgba(96, 165, 250, 0.25);
-
-    --sec-startups: #A78BFA;
-    --sec-startups-subtle: rgba(167, 139, 250, 0.12);
-    --sec-startups-border: rgba(167, 139, 250, 0.25);
-
-    --sec-funding: #34D399;
-    --sec-funding-subtle: rgba(52, 211, 153, 0.12);
-    --sec-funding-border: rgba(52, 211, 153, 0.25);
-
-    --sec-schemes: #FBBF24;
-    --sec-schemes-subtle: rgba(251, 191, 36, 0.12);
-    --sec-schemes-border: rgba(251, 191, 36, 0.25);
-
-    --sec-investors: #818CF8;
-    --sec-investors-subtle: rgba(129, 140, 248, 0.12);
-    --sec-investors-border: rgba(129, 140, 248, 0.25);
-
-    --sec-grants: #F59E0B;
-    --sec-grants-subtle: rgba(245, 158, 11, 0.12);
-    --sec-grants-border: rgba(245, 158, 11, 0.25);
-
-    --sec-events: #FB923C;
-    --sec-events-subtle: rgba(251, 146, 60, 0.12);
-    --sec-events-border: rgba(251, 146, 60, 0.25);
-
-    --sec-problems: #F87171;
-    --sec-problems-subtle: rgba(248, 113, 113, 0.12);
-    --sec-problems-border: rgba(248, 113, 113, 0.25);
-
-    --glass-nav-bg: rgba(17, 24, 39, 0.88);
-    --glass-nav-border: rgba(255, 255, 255, 0.09);
-    --glass-nav-shadow: 0 8px 28px -4px rgba(0, 0, 0, 0.5), 0 2px 8px -2px rgba(0, 0, 0, 0.3);
-
-    --glass-card-bg: rgba(17, 24, 39, 0.82);
-    --glass-card-hover-bg: rgba(24, 34, 53, 0.94);
-    --glass-card-border: rgba(255, 255, 255, 0.08);
-    --glass-card-highlight: inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
-    --glass-card-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.45), 0 2px 6px -2px rgba(0, 0, 0, 0.25);
-
-    --glass-modal-bg: rgba(17, 24, 39, 0.96);
-    --glass-modal-border: rgba(255, 255, 255, 0.12);
-    --glass-modal-shadow: 0 24px 60px -10px rgba(0, 0, 0, 0.7), 0 8px 20px -4px rgba(0, 0, 0, 0.4);
-
-    --glass-input-bg: rgba(31, 41, 55, 0.65);
-    --glass-input-border: rgba(255, 255, 255, 0.12);
-
-    --bg-base: var(--color-bg);
-    --text-primary: var(--color-text-primary);
-    --text-secondary: var(--color-text-secondary);
-    --text-tertiary: var(--color-text-tertiary);
-    --border-subtle: var(--color-border-subtle);
-
-    --accent-primary: var(--color-primary);
-    --accent-primary-hover: var(--color-primary-hover);
-    --accent-glow: var(--color-primary-glow);
-    --accent-indigo: var(--sec-investors);
-    --accent-teal: var(--sec-funding);
-    --accent-emerald: var(--sec-funding);
-    --accent-coral: var(--sec-events);
-    --accent-amber: var(--sec-schemes);
-    --accent-purple: var(--sec-startups);
-    --accent-blue: var(--sec-news);
-  }
+/* ==============================================================
+   CURATED PALETTE 7: GRAPHITE SLATE (Executive Titanium & Charcoal)
+   ============================================================== */
+[data-palette="graphite"] {
+  --color-primary: #334155;
+  --color-primary-hover: #1E293B;
+  --color-primary-light: #475569;
+  --color-primary-dark: #0F172A;
+  --color-primary-subtle: rgba(51, 65, 85, 0.09);
+  --color-primary-border: rgba(51, 65, 85, 0.25);
+  --color-primary-glow: rgba(51, 65, 85, 0.22);
+  --bg-ambient-1: rgba(51, 65, 85, 0.08);
+  --bg-ambient-2: rgba(71, 85, 105, 0.06);
+  --bg-ambient-3: rgba(100, 116, 139, 0.05);
+  --bg-ambient-4: rgba(30, 41, 59, 0.05);
+}
+[data-theme="dark"][data-palette="graphite"] {
+  --color-primary: #94A3B8;
+  --color-primary-hover: #CBD5E1;
+  --color-primary-light: #E2E8F0;
+  --color-primary-dark: #64748B;
+  --color-primary-fg: #0B132B;
+  --color-accent-fg: #0B132B;
+  --color-primary-subtle: rgba(148, 163, 184, 0.16);
+  --color-primary-border: rgba(148, 163, 184, 0.32);
+  --color-primary-glow: rgba(148, 163, 184, 0.30);
+  --bg-ambient-1: rgba(148, 163, 184, 0.16);
+  --bg-ambient-2: rgba(203, 213, 225, 0.10);
+  --bg-ambient-3: rgba(100, 116, 139, 0.09);
+  --bg-ambient-4: rgba(248, 250, 252, 0.08);
 }
 

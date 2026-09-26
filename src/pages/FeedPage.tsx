@@ -238,16 +238,16 @@ export const FeedPage: React.FC<FeedPageProps> = memo(({
 
             {activeItem.problemContext && (
               <div className="grid grid-cols-1 gap-2 text-xs">
-                <div className="p-3 rounded-[12px] bg-red-500/[0.06] border border-red-500/20">
-                  <div className="flex items-center gap-1.5 font-bold text-red-600 mb-1">
+                <div className="p-3 rounded-[12px] bg-[var(--color-error-bg)] border border-[var(--color-error-border)]">
+                  <div className="flex items-center gap-1.5 font-bold text-[var(--color-error-fg)] mb-1">
                     <AlertCircle className="w-3.5 h-3.5" />
                     <span>The Problem</span>
                   </div>
                   <p className="text-[var(--color-text-secondary)]">{activeItem.problemContext}</p>
                 </div>
                 {activeItem.fixSolution && (
-                  <div className="p-3 rounded-[12px] bg-blue-500/[0.06] border border-blue-500/20">
-                    <div className="flex items-center gap-1.5 font-bold text-[var(--cat-fixes)] mb-1">
+                  <div className="p-3 rounded-[12px] bg-[var(--color-info-bg)] border border-[var(--color-info-border)]">
+                    <div className="flex items-center gap-1.5 font-bold text-[var(--color-info-fg)] mb-1">
                       <CheckCircle2 className="w-3.5 h-3.5" />
                       <span>The Fix</span>
                     </div>
@@ -303,7 +303,7 @@ export const FeedPage: React.FC<FeedPageProps> = memo(({
                     href={activeItem.sourceUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-4 py-2 min-h-[44px] rounded-full bg-[var(--color-accent)] text-[#0B1F3A] text-xs font-bold hover:opacity-95 active:scale-[0.97] transition-all"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 min-h-[44px] rounded-full bg-[var(--color-accent)] text-[var(--color-accent-fg)] text-xs font-bold hover:opacity-95 active:scale-[0.97] transition-all"
                   >
                     <span>Read Article</span>
                     <ExternalLink className="w-3.5 h-3.5" />

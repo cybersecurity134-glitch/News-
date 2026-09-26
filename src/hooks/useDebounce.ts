@@ -5,7 +5,10 @@
 
 import { useState, useEffect } from 'react';
 
-export function useDebounce<T>(value: T, delayMs = 300): T {
+/**
+ * Custom hook to debounce values (default 300ms) to avoid executing heavy operations on every keystroke
+ */
+export function useDebounce<T>(value: T, delayMs: number = 300): T {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
   useEffect(() => {

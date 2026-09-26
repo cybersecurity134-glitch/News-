@@ -118,7 +118,7 @@ export const NewsCard: React.FC<NewsCardProps> = memo(({
         <div className="flex items-center gap-2">
           <CategoryTag category={item.category} size={isTopStory ? 'md' : 'sm'} />
           {isTopStory && (
-            <span className="text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full bg-[var(--color-accent)] text-[#0B1F3A]">
+            <span className="text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full bg-[var(--color-accent)] text-[var(--color-accent-fg)]">
               Top Story
             </span>
           )}

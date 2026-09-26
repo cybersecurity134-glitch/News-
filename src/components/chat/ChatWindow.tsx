@@ -36,9 +36,9 @@ export const ChatWindow: React.FC<ChatWindowProps> = memo(({
   const bottomRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
 
-  // Auto-scroll on new message
+  // Auto-scroll on new message (instant without frame drops)
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    bottomRef.current?.scrollIntoView({ behavior: 'auto' });
   }, [messages.length]);
 
   const handleSend = async (e: React.FormEvent) => {

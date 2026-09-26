@@ -65,7 +65,7 @@ export const AdminPage: React.FC = () => {
               <h2 className="text-xl font-extrabold tracking-tight text-[var(--color-text-primary)]">
                 Editorial Control Center
               </h2>
-              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase bg-[#007AFF]/15 text-[#007AFF]">
+              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase bg-[var(--color-primary-subtle)] text-[var(--color-primary)]">
                 Admin Tier
               </span>
             </div>
@@ -80,7 +80,7 @@ export const AdminPage: React.FC = () => {
               onClick={() => setActiveSubTab('queue')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 activeSubTab === 'queue'
-                  ? 'bg-white dark:bg-[#1C1C1E] text-[var(--color-text-primary)] shadow-xs'
+                  ? 'bg-[var(--color-surface-elevated)] text-[var(--color-text-primary)] shadow-xs'
                   : 'text-[var(--color-text-secondary)]'
               }`}
             >
@@ -92,7 +92,7 @@ export const AdminPage: React.FC = () => {
               onClick={() => setActiveSubTab('password')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 activeSubTab === 'password'
-                  ? 'bg-white dark:bg-[#1C1C1E] text-[var(--color-text-primary)] shadow-xs'
+                  ? 'bg-[var(--color-surface-elevated)] text-[var(--color-text-primary)] shadow-xs'
                   : 'text-[var(--color-text-secondary)]'
               }`}
             >
@@ -104,7 +104,7 @@ export const AdminPage: React.FC = () => {
               onClick={() => setActiveSubTab('contributors')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 activeSubTab === 'contributors'
-                  ? 'bg-white dark:bg-[#1C1C1E] text-[var(--color-text-primary)] shadow-xs'
+                  ? 'bg-[var(--color-surface-elevated)] text-[var(--color-text-primary)] shadow-xs'
                   : 'text-[var(--color-text-secondary)]'
               }`}
             >

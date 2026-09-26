@@ -86,4 +86,14 @@ export interface UserStats {
 }
 
 export type ThemeOption = 'light' | 'dark' | 'system';
+export type ColorPalette =
+  | 'royal'
+  | 'emerald'
+  | 'amethyst'
+  | 'orange'
+  | 'bordeaux'
+  | 'graphite'
+  | 'obsidian'
+  | 'custom';
+export type FontStyle = 'classic-editorial' | 'executive-sans';
 export type TextSizeOption = 'normal' | 'large' | 'huge';

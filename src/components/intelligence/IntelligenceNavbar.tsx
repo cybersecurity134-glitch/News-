@@ -4,6 +4,7 @@
  */
 
 import React, { memo, useState, useEffect, useRef } from 'react';
+import { GlobeLogo } from '../brand/GlobeLogo';
 import {
   Search,
   Bell,
@@ -21,10 +22,14 @@ import {
   Camera,
   Plus,
   MoreVertical,
+  Palette,
+  Check,
+  Settings,
 } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
 import { useIntelligence } from '../../context/IntelligenceContext';
 import { useAuth } from '../../context/AuthContext';
+import { ThemeSelectorDropdown, PALETTES_META } from '../theme/ThemeSelectorDropdown';
 
 interface IntelligenceNavbarProps {
   onOpenSearch: () => void;
@@ -33,6 +38,7 @@ interface IntelligenceNavbarProps {
   onOpenAdmin: () => void;
   onOpenAuth: (mode?: 'login' | 'signup') => void;
   onOpenAddNews: () => void;
+  onOpenSettings?: () => void;
 }
 
 export const IntelligenceNavbar: React.FC<IntelligenceNavbarProps> = memo(({
@@ -42,13 +48,12 @@ export const IntelligenceNavbar: React.FC<IntelligenceNavbarProps> = memo(({
   onOpenAdmin,
   onOpenAuth,
   onOpenAddNews,
+  onOpenSettings,
 }) => {
-  const { isDark, toggleTheme } = useTheme();
+  const { isDark, toggleTheme, palette, setPalette } = useTheme();
   const { alerts, isRefreshing, refreshData } = useIntelligence();
   const { currentUser, isAdmin, logout } = useAuth();
-  const [showUserMenu, setShowUserMenu] = useState(false);
   const [showMobileMore, setShowMobileMore] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
 
   const activeAlertsCount = alerts.filter((a) => a.active).length;
@@ -56,16 +61,12 @@ export const IntelligenceNavbar: React.FC<IntelligenceNavbarProps> = memo(({
   // Close menus on outside click or escape
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
-        setShowUserMenu(false);
-      }
       if (mobileMenuRef.current && !mobileMenuRef.current.contains(e.target as Node)) {
         setShowMobileMore(false);
       }
     };
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        setShowUserMenu(false);
         setShowMobileMore(false);
       }
     };
@@ -78,7 +79,6 @@ export const IntelligenceNavbar: React.FC<IntelligenceNavbarProps> = memo(({
   }, []);
 
   const handleAdminClick = () => {
-    setShowUserMenu(false);
     setShowMobileMore(false);
     if (!currentUser) {
       onOpenAuth('login');
@@ -94,12 +94,15 @@ export const IntelligenceNavbar: React.FC<IntelligenceNavbarProps> = memo(({
   return (
     <header className="sticky top-0 z-40 w-full px-2 sm:px-6 pt-2 sm:pt-3 pb-2 safe-top">
       <div className="max-w-7xl mx-auto liquid-glass-nav rounded-2xl sm:rounded-full px-3 sm:px-5 py-2 sm:py-2.5 flex items-center justify-between gap-2 sm:gap-3 specular-line">
-        {/* Brand & Live Source Badge */}
-        <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[var(--color-primary)] p-0.5 shadow-sm shrink-0 flex items-center justify-center">
-            <div className="w-full h-full rounded-[10px] bg-white/15 flex items-center justify-center text-white font-bold text-sm">
-              <Sparkles className="w-4 h-4 text-white" />
-            </div>
+        {/* Brand & Live Source Badge (Long-press toggles 175Hz FPS Debug Overlay) */}
+        <div
+          id="brand-logo"
+          data-longpress-fps="true"
+          className="flex items-center gap-2 sm:gap-3 min-w-0 cursor-pointer select-none group"
+          title="VenturePulse — Long-press to toggle 175Hz FPS monitor (or Shift+F)"
+        >
+          <div className="relative shrink-0 transition-transform duration-300 group-hover:scale-105 active:scale-95">
+            <GlobeLogo size={36} className="sm:w-10 sm:h-10" />
           </div>
 
           <div className="min-w-0">
@@ -122,7 +125,7 @@ export const IntelligenceNavbar: React.FC<IntelligenceNavbarProps> = memo(({
           {/* Quick Search */}
           <button
             onClick={onOpenSearch}
-            className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full bg-black/5 dark:bg-white/10 hover:bg-black/10 text-xs text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] tap-target-44 interactive-press transition-colors"
+            className="w-9 h-9 sm:w-auto sm:h-10 px-0 sm:px-3 rounded-full flex items-center justify-center gap-1.5 border border-[var(--color-border-subtle)] bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 hover:border-[var(--color-primary-border)] hover:shadow-xs text-xs text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] active:scale-95 transition-all cursor-pointer select-none"
             title="Search verified startups, funding, schemes (⌘K)"
             aria-label="Search intelligence"
           >
@@ -136,24 +139,24 @@ export const IntelligenceNavbar: React.FC<IntelligenceNavbarProps> = memo(({
           {/* Add News Camera & Upload Button */}
           <button
             onClick={onOpenAddNews}
-            className="px-3 sm:px-4 py-1.5 rounded-full btn-classic-primary text-xs flex items-center gap-1.5 tap-target-44 shrink-0"
+            className="w-9 h-9 sm:w-auto sm:h-10 px-0 sm:px-3.5 rounded-full flex items-center justify-center gap-1.5 btn-classic-primary text-xs shadow-xs hover:shadow-sm active:scale-95 transition-all cursor-pointer select-none shrink-0"
             title="Photograph or upload news for OCR and verification"
             aria-label="Add News"
           >
-            <Camera className="w-3.5 h-3.5 shrink-0" />
-            <span className="hidden xs:inline sm:inline font-extrabold">Add News</span>
+            <Camera className="w-4 h-4 shrink-0" />
+            <span className="hidden sm:inline font-extrabold leading-none">Add News</span>
           </button>
 
           {/* Alerts Center */}
           <button
             onClick={onOpenAlerts}
-            className="relative p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] tap-target-44 interactive-press"
+            className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center border border-[var(--color-border-subtle)] bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:border-[var(--color-primary-border)] hover:shadow-xs active:scale-95 transition-all cursor-pointer select-none"
             title="Manage Intelligence Alerts"
             aria-label="Alerts"
           >
-            <Bell className="w-4 h-4" />
+            <Bell className="w-4 h-4 transition-transform group-hover:scale-110" />
             {activeAlertsCount > 0 && (
-              <span className="absolute top-1 right-1 px-1 min-w-[14px] h-3.5 rounded-full bg-[var(--color-error)] text-white text-[9px] font-extrabold flex items-center justify-center">
+              <span className="absolute -top-0.5 -right-0.5 px-1 min-w-[15px] h-3.5 rounded-full bg-[var(--color-error)] text-white text-[9px] font-extrabold flex items-center justify-center ring-2 ring-[var(--color-surface)]">
                 {activeAlertsCount}
               </span>
             )}
@@ -163,21 +166,31 @@ export const IntelligenceNavbar: React.FC<IntelligenceNavbarProps> = memo(({
           <button
             onClick={() => refreshData()}
             disabled={isRefreshing}
-            className="hidden sm:inline-flex p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] tap-target-44 interactive-press transition-colors"
+            className="hidden sm:flex w-9 h-9 sm:w-10 sm:h-10 rounded-full items-center justify-center border border-[var(--color-border-subtle)] bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:border-[var(--color-primary-border)] hover:shadow-xs active:scale-95 transition-all cursor-pointer select-none disabled:opacity-50"
             title="Refresh verified streams from official sources"
             aria-label="Refresh data"
           >
-            <RefreshCw className={`w-4 h-4 ${isRefreshing ? 'animate-spin text-[var(--color-primary)]' : ''}`} />
+            <RefreshCw className={`w-4 h-4 transition-transform ${isRefreshing ? 'animate-spin text-[var(--color-primary)]' : 'hover:rotate-45'}`} />
           </button>
 
           {/* Tablet & Desktop: Founder Preferences */}
           <button
             onClick={onOpenPreferences}
-            className="hidden sm:inline-flex p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] tap-target-44 interactive-press"
+            className="hidden sm:flex w-9 h-9 sm:w-10 sm:h-10 rounded-full items-center justify-center border border-[var(--color-border-subtle)] bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:border-[var(--color-primary-border)] hover:shadow-xs active:scale-95 transition-all cursor-pointer select-none"
             title="Personalize Feed & Region"
             aria-label="Personalization"
           >
-            <SlidersHorizontal className="w-4 h-4" />
+            <SlidersHorizontal className="w-4 h-4 transition-transform hover:scale-110" />
+          </button>
+
+          {/* Tablet & Desktop: Settings & Appearance */}
+          <button
+            onClick={onOpenSettings}
+            className="hidden sm:flex w-9 h-9 sm:w-10 sm:h-10 rounded-full items-center justify-center border border-[var(--color-border-subtle)] bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:border-[var(--color-primary-border)] hover:shadow-xs active:scale-95 transition-all cursor-pointer select-none"
+            title="Settings & Appearance (Theme, Colors, Typography)"
+            aria-label="Settings"
+          >
+            <Settings className="w-4 h-4 transition-transform hover:rotate-45" />
           </button>
 
           {/* Tablet & Desktop: Admin Dashboard Console Button */}
@@ -196,78 +209,7 @@ export const IntelligenceNavbar: React.FC<IntelligenceNavbarProps> = memo(({
           </button>
 
           {/* Tablet & Desktop: User Authentication & Account Menu */}
-          {currentUser ? (
-            <div className="relative hidden sm:block" ref={menuRef}>
-              <button
-                onClick={() => setShowUserMenu(!showUserMenu)}
-                className="flex items-center gap-1.5 pl-1.5 pr-2.5 py-1 rounded-full bg-black/5 dark:bg-white/10 hover:bg-black/10 text-xs text-[var(--color-text-primary)] transition-colors tap-target-44"
-                aria-expanded={showUserMenu}
-                aria-haspopup="true"
-              >
-                <div className="w-6 h-6 rounded-full bg-[var(--color-primary-subtle)] text-[var(--color-primary)] font-extrabold flex items-center justify-center text-[10px]">
-                  {currentUser.name ? currentUser.name.charAt(0).toUpperCase() : currentUser.email.charAt(0).toUpperCase()}
-                </div>
-                <span className="hidden lg:inline font-bold max-w-[85px] truncate">
-                  {currentUser.name || currentUser.email.split('@')[0]}
-                </span>
-                <ChevronDown className="w-3 h-3 text-[var(--color-text-tertiary)]" />
-              </button>
-
-              {showUserMenu && (
-                <div
-                  className="absolute right-0 mt-2 w-56 liquid-glass-modal rounded-2xl p-2 shadow-2xl border border-[var(--color-border)] space-y-1 z-50 animate-fade-in"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <div className="p-2.5 rounded-xl bg-black/5 dark:bg-white/5 space-y-0.5">
-                    <p className="text-xs font-extrabold text-[var(--color-text-primary)] truncate">
-                      {currentUser.name || 'Member'}
-                    </p>
-                    <p className="text-[11px] font-mono text-[var(--color-text-secondary)] truncate">
-                      {currentUser.email}
-                    </p>
-                    <div className="pt-1 flex items-center gap-1.5">
-                      <span
-                        className={`text-[9px] font-extrabold px-1.5 py-0.2 rounded uppercase ${
-                          isAdmin
-                            ? 'bg-[var(--color-primary-subtle)] text-[var(--color-primary)]'
-                            : 'bg-black/10 dark:bg-white/10 text-[var(--color-text-secondary)]'
-                        }`}
-                      >
-                        {currentUser.role}
-                      </span>
-                      <span className="text-[9px] text-[var(--color-success)] font-bold uppercase">
-                        ● {currentUser.status}
-                      </span>
-                    </div>
-                  </div>
-
-                  {isAdmin && (
-                    <button
-                      onClick={() => {
-                        setShowUserMenu(false);
-                        onOpenAdmin();
-                      }}
-                      className="w-full text-left px-3 py-2 rounded-xl hover:bg-black/5 dark:hover:bg-white/10 text-xs font-bold text-[var(--color-text-primary)] flex items-center gap-2"
-                    >
-                      <ShieldCheck className="w-4 h-4 text-[var(--color-primary)]" />
-                      <span>Open Admin Console</span>
-                    </button>
-                  )}
-
-                  <button
-                    onClick={() => {
-                      setShowUserMenu(false);
-                      logout();
-                    }}
-                    className="w-full text-left px-3 py-2 rounded-xl hover:bg-[var(--color-error-bg)] text-xs font-bold text-[var(--color-error)] flex items-center gap-2"
-                  >
-                    <LogOut className="w-4 h-4" />
-                    <span>Sign Out</span>
-                  </button>
-                </div>
-              )}
-            </div>
-          ) : (
+          {!currentUser && (
             <div className="hidden sm:flex items-center gap-1">
               <button
                 onClick={() => onOpenAuth('login')}
@@ -279,15 +221,10 @@ export const IntelligenceNavbar: React.FC<IntelligenceNavbarProps> = memo(({
             </div>
           )}
 
-          {/* Tablet & Desktop: Theme switcher */}
-          <button
-            onClick={toggleTheme}
-            className="hidden sm:inline-flex p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] tap-target-44 interactive-press"
-            title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-            aria-label="Toggle Theme"
-          >
-            {isDark ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-slate-700" />}
-          </button>
+          {/* Tablet & Desktop: Theme & Palette Customizer */}
+          <div className="hidden sm:block">
+            <ThemeSelectorDropdown align="right" />
+          </div>
 
           {/* Mobile Phone (< 640px): Compact Overflow & Account Menu */}
           <div className="relative sm:hidden" ref={mobileMenuRef}>
@@ -308,12 +245,12 @@ export const IntelligenceNavbar: React.FC<IntelligenceNavbarProps> = memo(({
 
             {showMobileMore && (
               <div
-                className="absolute right-0 mt-2 w-64 liquid-glass-modal rounded-2xl p-2.5 shadow-2xl border border-[var(--color-border)] space-y-2 z-50 animate-fade-in"
+                className="absolute right-0 mt-2 w-72 liquid-glass-modal rounded-3xl p-3 shadow-2xl border border-[var(--color-border)] space-y-2.5 z-50 animate-fade-in"
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* User Info (if logged in) */}
                 {currentUser ? (
-                  <div className="p-2.5 rounded-xl bg-black/5 dark:bg-white/5 space-y-0.5">
+                  <div className="p-2.5 rounded-2xl bg-black/5 dark:bg-white/5 space-y-0.5">
                     <p className="text-xs font-extrabold text-[var(--color-text-primary)] truncate">
                       {currentUser.name || 'Member'}
                     </p>
@@ -330,14 +267,64 @@ export const IntelligenceNavbar: React.FC<IntelligenceNavbarProps> = memo(({
                       setShowMobileMore(false);
                       onOpenAuth('login');
                     }}
-                    className="w-full text-left px-3 py-2 rounded-xl btn-classic-primary text-xs flex items-center gap-2 shadow-xs"
+                    className="w-full text-left px-3 py-2 rounded-2xl btn-classic-primary text-xs flex items-center gap-2 shadow-xs"
                   >
                     <LogIn className="w-4 h-4" />
                     <span>Sign In / Create Account</span>
                   </button>
                 )}
 
+                {/* Mobile Palette Selector Row */}
+                <div className="p-2.5 rounded-2xl bg-black/5 dark:bg-white/5 space-y-1.5 border border-[var(--color-border-subtle)]">
+                  <div className="flex items-center justify-between text-[11px] font-bold text-[var(--color-text-secondary)]">
+                    <span className="flex items-center gap-1.5">
+                      <Palette className="w-3.5 h-3.5 text-[var(--color-primary)]" />
+                      Visual Palette
+                    </span>
+                    <button
+                      onClick={() => toggleTheme()}
+                      className="p-1 rounded-full hover:bg-black/10 dark:hover:bg-white/10 text-[var(--color-text-primary)]"
+                      title={isDark ? 'Switch to Light' : 'Switch to Dark'}
+                    >
+                      {isDark ? <Sun className="w-3.5 h-3.5 text-amber-400" /> : <Moon className="w-3.5 h-3.5 text-slate-700" />}
+                    </button>
+                  </div>
+                  <div className="flex items-center justify-between gap-1 pt-1">
+                    {PALETTES_META.map((p) => {
+                      const isSelected = palette === p.id;
+                      const dotColor = isDark ? p.primaryDark : p.primaryLight;
+                      return (
+                        <button
+                          key={p.id}
+                          onClick={() => setPalette(p.id)}
+                          className={`w-7 h-7 rounded-full flex items-center justify-center transition-all ${
+                            isSelected
+                              ? 'ring-2 ring-[var(--color-primary)] scale-110 shadow-sm'
+                              : 'opacity-80 hover:opacity-100'
+                          }`}
+                          style={{ backgroundColor: dotColor }}
+                          title={p.name}
+                        >
+                          {isSelected && <Check className="w-3 h-3 text-white stroke-[3]" />}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
                 <div className="space-y-1 pt-1 border-t border-[var(--color-border-subtle)]">
+                  {/* Settings & Appearance */}
+                  <button
+                    onClick={() => {
+                      setShowMobileMore(false);
+                      onOpenSettings?.();
+                    }}
+                    className="w-full text-left px-3 py-2 rounded-xl hover:bg-black/5 dark:hover:bg-white/10 text-xs font-medium text-[var(--color-text-primary)] flex items-center gap-2.5 tap-target-44"
+                  >
+                    <Settings className="w-4 h-4 text-[var(--color-primary)]" />
+                    <span>Settings & Appearance</span>
+                  </button>
+
                   {/* Preferences */}
                   <button
                     onClick={() => {
@@ -360,19 +347,6 @@ export const IntelligenceNavbar: React.FC<IntelligenceNavbarProps> = memo(({
                   >
                     <RefreshCw className={`w-4 h-4 text-[var(--color-primary)] ${isRefreshing ? 'animate-spin' : ''}`} />
                     <span>Refresh Verified Feeds</span>
-                  </button>
-
-                  {/* Theme Switcher */}
-                  <button
-                    onClick={() => {
-                      toggleTheme();
-                    }}
-                    className="w-full text-left px-3 py-2 rounded-xl hover:bg-black/5 dark:hover:bg-white/10 text-xs font-medium text-[var(--color-text-primary)] flex items-center justify-between tap-target-44"
-                  >
-                    <div className="flex items-center gap-2.5">
-                      {isDark ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-slate-700" />}
-                      <span>{isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}</span>
-                    </div>
                   </button>
 
                   {/* Admin Console */}

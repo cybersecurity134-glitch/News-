@@ -13,7 +13,7 @@ const __dirname = path.dirname(__filename);
 const DATA_DIR = path.resolve(__dirname, '../../data');
 const DB_FILE = path.join(DATA_DIR, 'auth_database.json');
 
-export type UserRole = 'admin' | 'member';
+export type UserRole = 'admin' | 'member' | 'uploader' | 'viewer';
 export type UserStatus = 'active' | 'blocked' | 'pending' | 'suspended';
 
 export interface UserRecord {
@@ -61,6 +61,7 @@ export interface SystemSettings {
   pauseRegistrations: boolean;
   disableMemberAccess: boolean;
   emergencyMessage: string;
+  adminUploadCode?: string;
 }
 
 export interface PasswordResetRecord {
@@ -123,6 +124,7 @@ class AuthDatabase {
     pauseRegistrations: false,
     disableMemberAccess: false,
     emergencyMessage: 'Member access is temporarily suspended for system maintenance. Please check back shortly.',
+    adminUploadCode: process.env.UPLOADER_FIXED_CODE || '26054',
   };
 
   constructor() {

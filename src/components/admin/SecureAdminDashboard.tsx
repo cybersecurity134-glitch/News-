@@ -356,8 +356,8 @@ export const SecureAdminDashboard: React.FC<SecureAdminDashboardProps> = ({
           <div
             className={`p-3.5 rounded-2xl text-xs font-semibold flex items-center justify-between gap-2 animate-fade-in ${
               actionNotice.type === 'success'
-                ? 'bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400'
-                : 'bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400'
+                ? 'bg-[var(--color-success-bg)] border border-[var(--color-success-border)] text-[var(--color-success-fg)]'
+                : 'bg-[var(--color-error-bg)] border border-[var(--color-error-border)] text-[var(--color-error-fg)]'
             }`}
           >
             <div className="flex items-center gap-2">
@@ -649,23 +649,23 @@ export const SecureAdminDashboard: React.FC<SecureAdminDashboardProps> = ({
                             <span
                               className={`px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wide inline-flex items-center gap-1 ${
                                 user.status === 'active'
-                                  ? 'bg-emerald-500/15 text-emerald-500'
+                                  ? 'bg-[var(--color-success-bg)] text-[var(--color-success-fg)]'
                                   : user.status === 'blocked'
-                                  ? 'bg-rose-500/15 text-rose-500'
+                                  ? 'bg-[var(--color-error-bg)] text-[var(--color-error-fg)]'
                                   : user.status === 'suspended'
-                                  ? 'bg-amber-500/15 text-amber-500'
-                                  : 'bg-blue-500/15 text-blue-500'
+                                  ? 'bg-[var(--color-warning-bg)] text-[var(--color-warning-fg)]'
+                                  : 'bg-[var(--color-primary-subtle)] text-[var(--color-primary)]'
                               }`}
                             >
                               <span
                                 className={`w-1.5 h-1.5 rounded-full ${
                                   user.status === 'active'
-                                    ? 'bg-emerald-500'
+                                    ? 'bg-[var(--color-success)]'
                                     : user.status === 'blocked'
-                                    ? 'bg-rose-500'
+                                    ? 'bg-[var(--color-error)]'
                                     : user.status === 'suspended'
-                                    ? 'bg-amber-500'
-                                    : 'bg-blue-500'
+                                    ? 'bg-[var(--color-warning)]'
+                                    : 'bg-[var(--color-primary)]'
                                 }`}
                               />
                               {user.status}

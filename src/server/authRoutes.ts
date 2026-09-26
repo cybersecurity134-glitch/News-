@@ -5,7 +5,7 @@
 
 import express, { Request, Response, NextFunction } from 'express';
 import crypto from 'crypto';
-import { authDb, sanitizeUser, verifyPassword, hashPassword, UserRecord, SessionRecord } from './authDb.ts';
+import { authDb, sanitizeUser, verifyPassword, hashPassword, UserRecord, SessionRecord, UserRole } from './authDb.ts';
 
 export const authRouter = express.Router();
 
@@ -104,21 +104,34 @@ export function requireAdmin(req: AuthenticatedRequest, res: Response, next: Nex
 // PUBLIC AUTH ROUTES
 // ==========================================
 
+// Check if an email is already registered (instant debounced live check for client)
+authRouter.get('/check-email', (req: Request, res: Response) => {
+  const email = (req.query.email as string || '').trim().toLowerCase();
+  if (!email || !email.includes('@')) {
+    return res.json({ available: true, valid: false });
+  }
+  const user = authDb.findUserByEmail(email);
+  return res.json({
+    available: !user,
+    valid: true,
+  });
+});
+
 // Register / Sign Up
 authRouter.post('/signup', async (req: Request, res: Response) => {
   try {
-    const { email, password, confirmPassword, name, phone } = req.body;
+    const { email, password, confirmPassword, name, phone, role, uploadPassword } = req.body;
 
     if (!email || !email.includes('@')) {
-      return res.status(400).json({ error: 'A valid email address is required.' });
+      return res.status(400).json({ error: 'A valid email address is required.', field: 'email' });
     }
 
     if (!password || password.length < 6) {
-      return res.status(400).json({ error: 'Password must be at least 6 characters long.' });
+      return res.status(400).json({ error: 'Password must be at least 6 characters long.', field: 'password' });
     }
 
     if (confirmPassword !== undefined && password !== confirmPassword) {
-      return res.status(400).json({ error: 'Passwords do not match.' });
+      return res.status(400).json({ error: 'Passwords do not match.', field: 'confirmPassword' });
     }
 
     const normEmail = email.trim().toLowerCase();
@@ -131,6 +144,18 @@ authRouter.post('/signup', async (req: Request, res: Response) => {
         error: 'New registrations are currently unavailable.',
         registrationsPaused: true,
       });
+    }
+
+    // Role Enforcement: Contributor accounts must require the admin-set upload passcode
+    const isContributor = role === 'uploader' || role === 'contributor';
+    if (isContributor && !isAdminEmail) {
+      const activeAdminUploadCode = (authDb.settings.adminUploadCode || process.env.UPLOADER_FIXED_CODE || '26054').trim();
+      if (!uploadPassword || uploadPassword.trim() !== activeAdminUploadCode) {
+        return res.status(400).json({
+          error: 'Invalid admin-set upload passcode. Please enter the passcode provided by the administrator to activate Contributor access.',
+          field: 'uploadPassword',
+        });
+      }
     }
 
     // Check existing user
@@ -164,7 +189,18 @@ authRouter.post('/signup', async (req: Request, res: Response) => {
 
       return res.status(400).json({
         error: 'An account with this email already exists. Please log in.',
+        field: 'email',
       });
+    }
+
+    // Determine final role
+    let assignedRole: UserRole = 'member';
+    if (isAdminEmail) {
+      assignedRole = 'admin';
+    } else if (isContributor) {
+      assignedRole = 'uploader';
+    } else if (role === 'viewer') {
+      assignedRole = 'viewer';
     }
 
     // Create fresh user account
@@ -173,7 +209,7 @@ authRouter.post('/signup', async (req: Request, res: Response) => {
       password,
       name,
       phone,
-      role: isAdminEmail ? 'admin' : 'member',
+      role: assignedRole,
       status: 'active',
     });
 

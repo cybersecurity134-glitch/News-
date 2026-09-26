@@ -54,6 +54,8 @@ export const ChatList: React.FC<ChatListProps> = ({
                   `https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&auto=format&fit=crop&q=80`
                 }
                 alt={partner.name}
+                loading="lazy"
+                decoding="async"
                 className="w-11 h-11 rounded-full object-cover border border-black/10"
               />
               {thread.unreadCount > 0 && (

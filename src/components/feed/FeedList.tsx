@@ -97,7 +97,7 @@ export const FeedList: React.FC<FeedListProps> = memo(({
           {onRefresh && (
             <button
               onClick={onRefresh}
-              className="mt-2 inline-flex items-center gap-2 px-4 py-2 min-h-[44px] rounded-full bg-[var(--color-accent)] text-[#0B1F3A] text-xs font-bold active:scale-[0.97] transition-all"
+              className="mt-2 inline-flex items-center gap-2 px-4 py-2 min-h-[44px] rounded-full bg-[var(--color-accent)] text-[var(--color-accent-fg)] text-xs font-bold active:scale-[0.97] transition-all"
             >
               <RefreshCw className="w-3.5 h-3.5" />
               <span>Refresh Feed</span>

@@ -13,7 +13,7 @@ interface SchemeCardProps {
 
 export const SchemeCard: React.FC<SchemeCardProps> = memo(({ scheme }) => {
   return (
-    <div className="liquid-glass-card p-5 space-y-4 select-none">
+    <div className="liquid-glass-card card-accent-top-schemes p-5 space-y-4 select-none">
       {/* Header */}
       <div className="flex items-start justify-between gap-3">
         <div>

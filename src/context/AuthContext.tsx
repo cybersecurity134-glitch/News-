@@ -180,26 +180,40 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   // Admin role is confirmed server-side in currentUser.role === 'admin'
   const isAdmin = currentUser?.role === 'admin';
 
+  const contextValue = React.useMemo(
+    () => ({
+      currentUser,
+      isLoading,
+      isAdmin,
+      systemSettings,
+      login,
+      signup,
+      logout,
+      forgotPassword,
+      resetPassword,
+      refreshMe,
+      updateSettingsState,
+      loginWithOtpUser,
+      switchUser,
+      loginUploader,
+      verifyUploaderOtp,
+    }),
+    [
+      currentUser,
+      isLoading,
+      isAdmin,
+      systemSettings,
+      login,
+      signup,
+      logout,
+      forgotPassword,
+      resetPassword,
+      refreshMe,
+    ]
+  );
+
   return (
-    <AuthContext.Provider
-      value={{
-        currentUser,
-        isLoading,
-        isAdmin,
-        systemSettings,
-        login,
-        signup,
-        logout,
-        forgotPassword,
-        resetPassword,
-        refreshMe,
-        updateSettingsState,
-        loginWithOtpUser,
-        switchUser,
-        loginUploader,
-        verifyUploaderOtp,
-      }}
-    >
+    <AuthContext.Provider value={contextValue}>
       {children}
     </AuthContext.Provider>
   );

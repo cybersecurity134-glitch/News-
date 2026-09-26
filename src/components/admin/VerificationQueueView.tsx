@@ -188,9 +188,9 @@ export const VerificationQueueView: React.FC = () => {
           </span>
         </div>
 
-        <div className="p-4 rounded-3xl bg-purple-500/10 border border-purple-500/20">
-          <span className="text-[11px] font-bold text-purple-700 dark:text-purple-400 block">Published Updates</span>
-          <span className="text-xl font-extrabold text-purple-800 dark:text-purple-300 mt-1 block">
+        <div className="p-4 rounded-3xl bg-[var(--color-accent-subtle)] border border-[var(--color-accent-border)]">
+          <span className="text-[11px] font-bold text-[var(--color-accent)] block">Published Updates</span>
+          <span className="text-xl font-extrabold text-[var(--color-accent)] mt-1 block">
             {stats?.publishedUpdates ?? submissions.filter((s) => s.reviewStatus === 'published_as_update').length}
           </span>
         </div>
@@ -310,7 +310,7 @@ export const VerificationQueueView: React.FC = () => {
 
                       {/* Classification Badge */}
                       {sub.classification === 'existing_update' && (
-                        <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-purple-500/15 text-purple-600 dark:text-purple-400 flex items-center gap-1">
+                        <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-[var(--color-accent-subtle)] text-[var(--color-accent)] flex items-center gap-1">
                           <Sparkles className="w-3 h-3" /> Factual Update
                         </span>
                       )}
@@ -356,7 +356,7 @@ export const VerificationQueueView: React.FC = () => {
                         : sub.reviewStatus === 'rejected'
                         ? 'bg-rose-500/20 text-rose-600 dark:text-rose-400'
                         : sub.reviewStatus === 'published_as_update'
-                        ? 'bg-purple-500/20 text-purple-600 dark:text-purple-400'
+                        ? 'bg-[var(--color-accent-subtle)] text-[var(--color-accent)]'
                         : sub.reviewStatus === 'correction_requested'
                         ? 'bg-amber-500/20 text-amber-700 dark:text-amber-400'
                         : 'bg-amber-500/15 text-amber-700 dark:text-amber-300'
@@ -522,7 +522,7 @@ export const VerificationQueueView: React.FC = () => {
                       <ShieldCheck className="w-4 h-4 text-[var(--accent-primary)]" />
                       AI Verification Pipeline Report
                     </h4>
-                    <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-blue-500/15 text-[var(--accent-primary)]">
+                    <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-[var(--color-primary-subtle)] text-[var(--color-primary)]">
                       AI Confidence: {selectedSubmission.verificationReport.aiConfidence}%
                     </span>
                   </div>
@@ -694,7 +694,7 @@ export const VerificationQueueView: React.FC = () => {
                     const firstMatch = selectedSubmission.matchingMatches?.[0];
                     if (firstMatch) setTargetArticleId(firstMatch.matchedArticleId);
                   }}
-                  className="px-3 py-2 rounded-2xl border border-purple-500/30 bg-purple-500/10 text-purple-600 dark:text-purple-400 hover:bg-purple-500/20 text-xs font-bold flex items-center gap-1.5"
+                  className="px-3 py-2 rounded-2xl border border-[var(--color-accent-border)] bg-[var(--color-accent-subtle)] text-[var(--color-accent)] hover:opacity-90 text-xs font-bold flex items-center gap-1.5"
                 >
                   <Sparkles className="w-3.5 h-3.5" />
                   <span>Publish as Update</span>

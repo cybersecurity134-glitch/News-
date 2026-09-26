@@ -82,7 +82,7 @@ export const EventsPage: React.FC = () => {
         {currentUser && (
           <button
             onClick={() => setShowAddModal(true)}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-[#007AFF] hover:bg-[#0062CC] text-white text-xs font-semibold shadow-xs transition-transform active:scale-98"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-[var(--color-primary-fg)] text-xs font-semibold shadow-xs transition-transform active:scale-98"
           >
             <Plus className="w-4 h-4" />
             <span>List Event</span>
@@ -98,7 +98,7 @@ export const EventsPage: React.FC = () => {
           <div className="w-full max-w-md rounded-2xl bg-[var(--color-card-bg)] border border-[var(--color-separator)] p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between pb-2 border-b border-[var(--color-separator)]">
               <div className="flex items-center gap-2">
-                <CalendarDays className="w-5 h-5 text-[#007AFF]" />
+                <CalendarDays className="w-5 h-5 text-[var(--color-primary)]" />
                 <h3 className="text-headline text-[var(--color-text-primary)] font-bold">
                   List Startup Event
                 </h3>
@@ -114,7 +114,7 @@ export const EventsPage: React.FC = () => {
             <form onSubmit={handleCreateEvent} className="space-y-3">
               <div>
                 <label className="block text-footnote font-semibold text-[var(--color-text-secondary)] mb-1">
-                  Event / Demo Day Name <span className="text-red-500">*</span>
+                  Event / Demo Day Name <span className="text-[var(--color-error)]">*</span>
                 </label>
                 <input
                   type="text"
@@ -122,27 +122,27 @@ export const EventsPage: React.FC = () => {
                   onChange={(e) => setName(e.target.value)}
                   placeholder="e.g. Y Combinator Summer Demo Day"
                   required
-                  className="w-full px-3 py-2 rounded-xl bg-black/5 dark:bg-white/5 border border-[var(--color-separator)] text-xs text-[var(--color-text-primary)] outline-none focus:ring-2 focus:ring-[#007AFF]"
+                  className="w-full px-3 py-2 rounded-xl bg-black/5 dark:bg-white/5 border border-[var(--color-separator)] text-xs text-[var(--color-text-primary)] outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-2">
                 <div>
                   <label className="block text-footnote font-semibold text-[var(--color-text-secondary)] mb-1">
-                    Event Date <span className="text-red-500">*</span>
+                    Event Date <span className="text-[var(--color-error)]">*</span>
                   </label>
                   <input
                     type="date"
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
                     required
-                    className="w-full px-3 py-2 rounded-xl bg-black/5 dark:bg-white/5 border border-[var(--color-separator)] text-xs text-[var(--color-text-primary)] outline-none focus:ring-2 focus:ring-[#007AFF]"
+                    className="w-full px-3 py-2 rounded-xl bg-black/5 dark:bg-white/5 border border-[var(--color-separator)] text-xs text-[var(--color-text-primary)] outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
                   />
                 </div>
 
                 <div>
                   <label className="block text-footnote font-semibold text-[var(--color-text-secondary)] mb-1">
-                    Location / Format <span className="text-red-500">*</span>
+                    Location / Format <span className="text-[var(--color-error)]">*</span>
                   </label>
                   <input
                     type="text"
@@ -150,14 +150,14 @@ export const EventsPage: React.FC = () => {
                     onChange={(e) => setLocation(e.target.value)}
                     placeholder="e.g. San Francisco or Online"
                     required
-                    className="w-full px-3 py-2 rounded-xl bg-black/5 dark:bg-white/5 border border-[var(--color-separator)] text-xs text-[var(--color-text-primary)] outline-none focus:ring-2 focus:ring-[#007AFF]"
+                    className="w-full px-3 py-2 rounded-xl bg-black/5 dark:bg-white/5 border border-[var(--color-separator)] text-xs text-[var(--color-text-primary)] outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
                   />
                 </div>
               </div>
 
               <div>
                 <label className="block text-footnote font-semibold text-[var(--color-text-secondary)] mb-1">
-                  Organizer / Host Entity <span className="text-red-500">*</span>
+                  Organizer / Host Entity <span className="text-[var(--color-error)]">*</span>
                 </label>
                 <input
                   type="text"
@@ -165,13 +165,13 @@ export const EventsPage: React.FC = () => {
                   onChange={(e) => setOrganizer(e.target.value)}
                   placeholder="e.g. Techstars, Andreessen Horowitz, Slush"
                   required
-                  className="w-full px-3 py-2 rounded-xl bg-black/5 dark:bg-white/5 border border-[var(--color-separator)] text-xs text-[var(--color-text-primary)] outline-none focus:ring-2 focus:ring-[#007AFF]"
+                  className="w-full px-3 py-2 rounded-xl bg-black/5 dark:bg-white/5 border border-[var(--color-separator)] text-xs text-[var(--color-text-primary)] outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
                 />
               </div>
 
               <div>
                 <label className="block text-footnote font-semibold text-[var(--color-text-secondary)] mb-1">
-                  Registration / RSVP URL <span className="text-red-500">*</span>
+                  Registration / RSVP URL <span className="text-[var(--color-error)]">*</span>
                 </label>
                 <input
                   type="url"
@@ -179,7 +179,7 @@ export const EventsPage: React.FC = () => {
                   onChange={(e) => setRegistrationUrl(e.target.value)}
                   placeholder="https://..."
                   required
-                  className="w-full px-3 py-2 rounded-xl bg-black/5 dark:bg-white/5 border border-[var(--color-separator)] text-xs text-[var(--color-text-primary)] outline-none focus:ring-2 focus:ring-[#007AFF]"
+                  className="w-full px-3 py-2 rounded-xl bg-black/5 dark:bg-white/5 border border-[var(--color-separator)] text-xs text-[var(--color-text-primary)] outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
                 />
               </div>
 
@@ -192,13 +192,13 @@ export const EventsPage: React.FC = () => {
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   placeholder="Eligibility, tracks, prize pool, or angel attendee list..."
-                  className="w-full px-3 py-2 rounded-xl bg-black/5 dark:bg-white/5 border border-[var(--color-separator)] text-xs text-[var(--color-text-primary)] outline-none focus:ring-2 focus:ring-[#007AFF] resize-none"
+                  className="w-full px-3 py-2 rounded-xl bg-black/5 dark:bg-white/5 border border-[var(--color-separator)] text-xs text-[var(--color-text-primary)] outline-none focus:ring-2 focus:ring-[var(--color-primary)] resize-none"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full py-2.5 rounded-xl bg-[#007AFF] hover:bg-[#0062CC] text-white text-xs font-semibold shadow-xs transition-colors"
+                className="w-full py-2.5 rounded-xl bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-[var(--color-primary-fg)] text-xs font-semibold shadow-xs transition-colors"
               >
                 Publish Event
               </button>

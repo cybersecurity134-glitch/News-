@@ -11,6 +11,7 @@ import crypto from 'crypto';
 import { INITIAL_NEWS, INITIAL_EVENTS, INITIAL_USERS, INITIAL_MESSAGES, INITIAL_NOTIFICATIONS } from './src/initialData.ts';
 import { NewsItem, StartupEvent, UserProfile, ChatMessage, AppNotification, AutomatedCheckResult, NewsCategory, OtpChallenge } from './src/types.ts';
 import { authRouter, adminRouter, authMiddleware } from './src/server/authRoutes.ts';
+import { authDb } from './src/server/authDb.ts';
 import { newsVerificationRouter } from './src/server/newsVerificationRoutes.ts';
 import { newsVerificationDb } from './src/server/newsVerificationDb.ts';
 
@@ -580,6 +581,8 @@ app.post(['/admin/password', '/api/admin/password'], (req: Request, res: Respons
   fixedUploaderCode = newPassword.trim();
   fixedUploaderCodeHash = crypto.createHash('sha256').update(fixedUploaderCode).digest('hex');
   adminUploadCode = fixedUploaderCode;
+  authDb.settings.adminUploadCode = fixedUploaderCode;
+  authDb.saveToDisk();
   res.json({ success: true, adminUploadCode: fixedUploaderCode, fixedUploaderCode });
 });
 

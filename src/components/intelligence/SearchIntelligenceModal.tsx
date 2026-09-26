@@ -6,6 +6,7 @@
 import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { Search, X, TrendingUp, ArrowRight, ExternalLink } from 'lucide-react';
 import { useIntelligence } from '../../context/IntelligenceContext';
+import { useDebounce } from '../../hooks/useDebounce';
 import { NewsEventCard } from './NewsEventCard';
 import { StartupCard } from './StartupCard';
 import { FundingCard } from './FundingCard';
@@ -31,6 +32,7 @@ export const SearchIntelligenceModal: React.FC<SearchIntelligenceModalProps> = (
   onClose,
 }) => {
   const [query, setQuery] = useState('');
+  const debouncedQuery = useDebounce(query, 300);
   const { newsEvents, startups, fundingEvents, governmentSchemes } = useIntelligence();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -47,8 +49,8 @@ export const SearchIntelligenceModal: React.FC<SearchIntelligenceModalProps> = (
   }, [isOpen]);
 
   const matchedNews = useMemo(() => {
-    if (!query.trim()) return [];
-    const q = query.toLowerCase().trim();
+    if (!debouncedQuery.trim()) return [];
+    const q = debouncedQuery.toLowerCase().trim();
     return newsEvents.filter(
       (n) =>
         n.headline.toLowerCase().includes(q) ||
@@ -57,11 +59,11 @@ export const SearchIntelligenceModal: React.FC<SearchIntelligenceModalProps> = (
         n.companiesMentioned.some((c) => c.toLowerCase().includes(q)) ||
         n.source.name.toLowerCase().includes(q)
     );
-  }, [query, newsEvents]);
+  }, [debouncedQuery, newsEvents]);
 
   const matchedStartups = useMemo(() => {
-    if (!query.trim()) return [];
-    const q = query.toLowerCase().trim();
+    if (!debouncedQuery.trim()) return [];
+    const q = debouncedQuery.toLowerCase().trim();
     return startups.filter(
       (s) =>
         s.name.toLowerCase().includes(q) ||
@@ -69,11 +71,11 @@ export const SearchIntelligenceModal: React.FC<SearchIntelligenceModalProps> = (
         s.founders.some((f) => f.toLowerCase().includes(q)) ||
         s.problemSolved.toLowerCase().includes(q)
     );
-  }, [query, startups]);
+  }, [debouncedQuery, startups]);
 
   const matchedSchemes = useMemo(() => {
-    if (!query.trim()) return [];
-    const q = query.toLowerCase().trim();
+    if (!debouncedQuery.trim()) return [];
+    const q = debouncedQuery.toLowerCase().trim();
     return governmentSchemes.filter(
       (sch) =>
         sch.name.toLowerCase().includes(q) ||
@@ -81,7 +83,7 @@ export const SearchIntelligenceModal: React.FC<SearchIntelligenceModalProps> = (
         sch.ministryOrDepartment.toLowerCase().includes(q) ||
         sch.supportType.toLowerCase().includes(q)
     );
-  }, [query, governmentSchemes]);
+  }, [debouncedQuery, governmentSchemes]);
 
   if (!isOpen) return null;
 
@@ -165,7 +167,7 @@ export const SearchIntelligenceModal: React.FC<SearchIntelligenceModalProps> = (
                     Matched Startups ({matchedStartups.length})
                   </h4>
                   <div className="space-y-3">
-                    {matchedStartups.map((s) => (
+                    {matchedStartups.slice(0, 10).map((s) => (
                       <StartupCard key={s.id} startup={s} />
                     ))}
                   </div>
@@ -178,7 +180,7 @@ export const SearchIntelligenceModal: React.FC<SearchIntelligenceModalProps> = (
                     Matched Government Schemes ({matchedSchemes.length})
                   </h4>
                   <div className="space-y-3">
-                    {matchedSchemes.map((sch) => (
+                    {matchedSchemes.slice(0, 10).map((sch) => (
                       <SchemeCard key={sch.id} scheme={sch} />
                     ))}
                   </div>
@@ -191,7 +193,7 @@ export const SearchIntelligenceModal: React.FC<SearchIntelligenceModalProps> = (
                     Matched Reports & Funding ({matchedNews.length})
                   </h4>
                   <div className="space-y-3">
-                    {matchedNews.map((n) => (
+                    {matchedNews.slice(0, 10).map((n) => (
                       <NewsEventCard key={n.id} item={n} />
                     ))}
                   </div>

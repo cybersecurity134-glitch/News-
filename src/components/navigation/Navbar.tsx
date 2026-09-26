@@ -79,9 +79,9 @@ export const Navbar: React.FC<NavbarProps> = memo(({
             aria-label="Toggle theme"
           >
             {isDark ? (
-              <Sun className="w-4 h-4 text-amber-400" />
+              <Sun className="w-4 h-4 text-[var(--color-warning)]" />
             ) : (
-              <Moon className="w-4 h-4 text-indigo-600" />
+              <Moon className="w-4 h-4 text-[var(--color-primary)]" />
             )}
           </button>
 

@@ -10,7 +10,7 @@
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
     
-    <!-- Prevent theme flash before first paint -->
+    <!-- Prevent theme and palette flash before first paint -->
     <script>
       (function() {
         try {
@@ -29,6 +29,45 @@
             }
           }
 
+          var palette = localStorage.getItem('vp_palette') || 'royal';
+          var customColor = localStorage.getItem('vp_custom_color') || '#1E40AF';
+          var font = localStorage.getItem('vp_font') || 'classic-editorial';
+
+          document.documentElement.setAttribute('data-palette', palette);
+          document.documentElement.setAttribute('data-font', font);
+
+          if (palette === 'custom' && customColor) {
+            try {
+              var hex = customColor.replace('#', '').trim();
+              if (hex.length === 3) hex = hex.split('').map(function(c) { return c + c; }).join('');
+              var num = parseInt(hex, 16);
+              if (!isNaN(num) && hex.length === 6) {
+                var r = (num >> 16) & 255;
+                var g = (num >> 8) & 255;
+                var b = num & 255;
+                var lum = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+                var fg = lum > 140 ? '#0B132B' : '#FFFFFF';
+                var subtle = 'rgba(' + r + ',' + g + ',' + b + ',' + (isDark ? '0.16' : '0.10') + ')';
+                var border = 'rgba(' + r + ',' + g + ',' + b + ',' + (isDark ? '0.32' : '0.26') + ')';
+                var glow = 'rgba(' + r + ',' + g + ',' + b + ',' + (isDark ? '0.30' : '0.22') + ')';
+
+                var s = document.documentElement.style;
+                s.setProperty('--color-primary', customColor);
+                s.setProperty('--color-primary-fg', fg);
+                s.setProperty('--color-primary-subtle', subtle);
+                s.setProperty('--color-primary-border', border);
+                s.setProperty('--color-primary-glow', glow);
+                s.setProperty('--color-accent', customColor);
+                s.setProperty('--color-accent-fg', fg);
+                s.setProperty('--color-accent-subtle', subtle);
+                s.setProperty('--color-accent-border', border);
+                s.setProperty('--color-accent-glow', glow);
+                s.setProperty('--accent-primary', customColor);
+                s.setProperty('--accent-glow', glow);
+              }
+            } catch (err) {}
+          }
+
           if (isDark) {
             document.documentElement.classList.add('dark');
             document.documentElement.setAttribute('data-theme', 'dark');
@@ -36,7 +75,7 @@
           } else {
             document.documentElement.classList.remove('dark');
             document.documentElement.setAttribute('data-theme', 'light');
-            document.documentElement.style.backgroundColor = '#F2F5F9';
+            document.documentElement.style.backgroundColor = '#F4F7FB';
           }
         } catch (e) {}
       })();
@@ -44,7 +83,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   </head>
   <body>
     <div id="root"></div>

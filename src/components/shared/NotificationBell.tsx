@@ -40,11 +40,11 @@ export const NotificationBell: React.FC<NotificationBellProps> = ({ onNavigate }
   const getIcon = (type: string) => {
     switch (type) {
       case 'chat':
-        return <MessageSquare className="w-3.5 h-3.5 text-[#007AFF]" />;
+        return <MessageSquare className="w-3.5 h-3.5 text-[var(--color-primary)]" />;
       case 'news_approved':
-        return <Newspaper className="w-3.5 h-3.5 text-emerald-500" />;
+        return <Newspaper className="w-3.5 h-3.5 text-[var(--color-success)]" />;
       default:
-        return <Shield className="w-3.5 h-3.5 text-purple-500" />;
+        return <Shield className="w-3.5 h-3.5 text-[var(--color-accent)]" />;
     }
   };
 
@@ -57,7 +57,7 @@ export const NotificationBell: React.FC<NotificationBellProps> = ({ onNavigate }
       >
         <Bell className="w-5 h-5" />
         {unreadCount > 0 && (
-          <span className="absolute top-1 right-1 flex items-center justify-center min-w-[18px] h-[18px] px-1 bg-[#FF3B30] text-white text-[10px] font-bold rounded-full ring-2 ring-[var(--color-bg)]">
+          <span className="absolute top-1 right-1 flex items-center justify-center min-w-[18px] h-[18px] px-1 bg-[var(--color-error)] text-[var(--color-primary-fg)] text-[10px] font-bold rounded-full ring-2 ring-[var(--color-bg)]">
             {unreadCount > 9 ? '9+' : unreadCount}
           </span>
         )}
@@ -72,7 +72,7 @@ export const NotificationBell: React.FC<NotificationBellProps> = ({ onNavigate }
             {unreadCount > 0 && (
               <button
                 onClick={markAllRead}
-                className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#007AFF] hover:underline"
+                className="inline-flex items-center gap-1 text-[11px] font-semibold text-[var(--color-primary)] hover:underline"
               >
                 <Check className="w-3 h-3" />
                 <span>Mark all read</span>
@@ -91,7 +91,7 @@ export const NotificationBell: React.FC<NotificationBellProps> = ({ onNavigate }
                   key={n.id}
                   onClick={() => handleNotificationClick(n)}
                   className={`p-3.5 flex items-start gap-3 transition-colors cursor-pointer ${
-                    !n.read ? 'bg-[#007AFF]/5' : 'hover:bg-black/2 dark:hover:bg-white/2'
+                    !n.read ? 'bg-[var(--color-primary-subtle)]' : 'hover:bg-black/2 dark:hover:bg-white/2'
                   }`}
                 >
                   <div className="p-1.5 rounded-full bg-black/5 dark:bg-white/5 shrink-0 mt-0.5">

@@ -128,6 +128,16 @@ export const apiClient = {
   },
 
   // Auth (General / Member / Admin)
+  async checkEmail(email: string): Promise<{ available: boolean; valid: boolean }> {
+    try {
+      const res = await fetch(`${API_BASE}/api/auth/check-email?email=${encodeURIComponent(email.trim())}`);
+      if (!res.ok) return { available: true, valid: false };
+      return await res.json();
+    } catch {
+      return { available: true, valid: false };
+    }
+  },
+
   async login(email: string, password?: string): Promise<{ user: AuthUser; sessionToken: string }> {
     const res = await fetch(`${API_BASE}/api/auth/login`, {
       method: 'POST',
@@ -135,7 +145,11 @@ export const apiClient = {
       body: JSON.stringify({ email: email.trim(), password: password || '' }),
     });
     const data = await res.json();
-    if (!res.ok) throw new Error(data.error || 'Login failed');
+    if (!res.ok) {
+      const err: any = new Error(data.error || 'Login failed');
+      err.field = data.field;
+      throw err;
+    }
     if (data.sessionToken && typeof window !== 'undefined') {
       localStorage.setItem('vp_session_token', data.sessionToken);
       localStorage.setItem('vp_auth_user', JSON.stringify(data.user));
@@ -158,7 +172,11 @@ export const apiClient = {
       body: JSON.stringify(payload),
     });
     const data = await res.json();
-    if (!res.ok) throw new Error(data.error || 'Signup failed');
+    if (!res.ok) {
+      const err: any = new Error(data.error || 'Signup failed');
+      err.field = data.field;
+      throw err;
+    }
     if (data.sessionToken && typeof window !== 'undefined') {
       localStorage.setItem('vp_session_token', data.sessionToken);
       localStorage.setItem('vp_auth_user', JSON.stringify(data.user));

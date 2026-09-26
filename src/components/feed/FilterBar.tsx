@@ -53,7 +53,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
                 onClick={() => onSelectCategory('all')}
                 className={`shrink-0 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all border ${
                   isActive
-                    ? 'bg-[var(--color-accent)] text-[#0B1F3A] border-[var(--color-accent)] shadow-xs'
+                    ? 'bg-[var(--color-accent)] text-[var(--color-accent-fg)] border-[var(--color-accent)] shadow-xs'
                     : 'bg-[var(--color-card-bg)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] border-[var(--color-border)]'
                 }`}
               >

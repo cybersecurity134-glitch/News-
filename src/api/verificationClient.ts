@@ -28,18 +28,80 @@ function getAuthHeaders(): HeadersInit {
 
 export const verificationClient = {
   /**
+   * Stream executive summary token-by-token with AbortController cancellation
+   */
+  async streamExecutiveSummary(
+    payload: {
+      text: string;
+      headline?: string;
+      contextHistory?: { role: string; content: string }[];
+      maxTokens?: number;
+    },
+    onToken: (token: string) => void,
+    signal?: AbortSignal
+  ): Promise<string> {
+    const res = await fetch('/api/news-verification/stream-summary', {
+      method: 'POST',
+      headers: getAuthHeaders(),
+      body: JSON.stringify(payload),
+      signal,
+    });
+
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({ error: 'Streaming summary failed' }));
+      throw new Error(err.error || 'Failed to stream summary');
+    }
+
+    const reader = res.body?.getReader();
+    if (!reader) throw new Error('Response body is not readable');
+
+    const decoder = new TextDecoder();
+    let fullText = '';
+    let buffer = '';
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      buffer += decoder.decode(value, { stream: true });
+      const lines = buffer.split('\n\n');
+      buffer = lines.pop() || '';
+
+      for (const line of lines) {
+        const trimmed = line.trim();
+        if (!trimmed.startsWith('data: ')) continue;
+        const dataStr = trimmed.replace('data: ', '').trim();
+        if (dataStr === '[DONE]') break;
+        try {
+          const parsed = JSON.parse(dataStr);
+          if (parsed.token) {
+            fullText += parsed.token;
+            onToken(parsed.token);
+          }
+        } catch {}
+      }
+    }
+
+    return fullText;
+  },
+
+  /**
    * Run OCR & Entity Extraction on media or text
    */
-  async extractNews(payload: {
-    dataUrl?: string;
-    mimeType?: string;
-    pastedText?: string;
-    sourceUrl?: string;
-  }): Promise<{ success: boolean; extracted: ExtractedEntities }> {
+  async extractNews(
+    payload: {
+      dataUrl?: string;
+      mimeType?: string;
+      pastedText?: string;
+      sourceUrl?: string;
+    },
+    signal?: AbortSignal
+  ): Promise<{ success: boolean; extracted: ExtractedEntities }> {
     const res = await fetch('/api/news-verification/extract', {
       method: 'POST',
       headers: getAuthHeaders(),
       body: JSON.stringify(payload),
+      signal,
     });
     if (!res.ok) {
       const err = await res.json().catch(() => ({ error: 'Extraction failed' }));
@@ -51,17 +113,20 @@ export const verificationClient = {
   /**
    * Run full verification & duplicate similarity check
    */
-  async verifyNews(payload: {
-    headline: string;
-    summary: string;
-    fullStory?: string;
-    category?: string;
-    date?: string;
-    location?: string;
-    sourceUrl?: string;
-    mediaDataUrl?: string;
-    entities?: ExtractedEntities;
-  }): Promise<{
+  async verifyNews(
+    payload: {
+      headline: string;
+      summary: string;
+      fullStory?: string;
+      category?: string;
+      date?: string;
+      location?: string;
+      sourceUrl?: string;
+      mediaDataUrl?: string;
+      entities?: ExtractedEntities;
+    },
+    signal?: AbortSignal
+  ): Promise<{
     success: boolean;
     report: NewsVerificationReport;
     similarityMatches: NewsSimilarityMatch[];
@@ -74,6 +139,7 @@ export const verificationClient = {
       method: 'POST',
       headers: getAuthHeaders(),
       body: JSON.stringify(payload),
+      signal,
     });
     if (!res.ok) {
       const err = await res.json().catch(() => ({ error: 'Verification failed' }));

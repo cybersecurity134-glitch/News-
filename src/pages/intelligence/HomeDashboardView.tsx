@@ -56,6 +56,11 @@ export const HomeDashboardView: React.FC<HomeDashboardViewProps> = memo(({
 
   return (
     <div className="space-y-8 animate-fade-in pb-16">
+      {/* Main Filter Bar - Rearranged to the top / starting */}
+      <section>
+        <FilterBar />
+      </section>
+
       {/* Breaking Intelligence Ticker */}
       <section className="liquid-glass-card p-3 sm:p-4 flex items-center justify-between gap-3 text-xs">
         <div className="flex items-center gap-2 min-w-0">
@@ -96,33 +101,28 @@ export const HomeDashboardView: React.FC<HomeDashboardViewProps> = memo(({
           Aggregated and verified across DPIIT, PIB, T-Hub, Economic Times, TechCrunch, and SEBI public circulars. No predictions or artificial completions.
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 pt-2 text-xs">
-          <div className="p-3.5 rounded-2xl bg-black/5 dark:bg-white/5 space-y-1">
-            <span className="text-[10px] font-extrabold uppercase text-[var(--accent-primary)]">Funding Momentum</span>
-            <p className="text-[var(--text-primary)] font-bold">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 pt-2 text-xs">
+          <div className="p-4 rounded-2xl bg-[var(--color-primary-subtle)] border border-[var(--color-primary-border)] space-y-1.5 transition-transform hover:-translate-y-0.5">
+            <span className="text-[10px] font-black uppercase text-[var(--color-primary)] tracking-wider">Funding Momentum</span>
+            <p className="text-[var(--color-text-primary)] font-bold text-xs sm:text-sm">
               $41M Series A for Indic Foundation AI & $24M EV fleet debt round documented.
             </p>
           </div>
 
-          <div className="p-3.5 rounded-2xl bg-black/5 dark:bg-white/5 space-y-1">
-            <span className="text-[10px] font-extrabold uppercase text-[var(--accent-teal)]">Policy & Grants</span>
-            <p className="text-[var(--text-primary)] font-bold">
+          <div className="p-4 rounded-2xl bg-[var(--sec-funding-subtle)] border border-[var(--sec-funding-border)] space-y-1.5 transition-transform hover:-translate-y-0.5">
+            <span className="text-[10px] font-black uppercase text-[var(--sec-funding)] tracking-wider">Policy & Grants</span>
+            <p className="text-[var(--color-text-primary)] font-bold text-xs sm:text-sm">
               Telangana T-Fund Cohort 4 active (up to ₹1 Cr); Angel Tax exemption simplified.
             </p>
           </div>
 
-          <div className="p-3.5 rounded-2xl bg-black/5 dark:bg-white/5 space-y-1 sm:col-span-2 lg:col-span-1">
-            <span className="text-[10px] font-extrabold uppercase text-[var(--accent-coral)]">Industry Challenge</span>
-            <p className="text-[var(--text-primary)] font-bold">
+          <div className="p-4 rounded-2xl bg-[var(--sec-problems-subtle)] border border-[var(--sec-problems-border)] space-y-1.5 sm:col-span-2 lg:col-span-1 transition-transform hover:-translate-y-0.5">
+            <span className="text-[10px] font-black uppercase text-[var(--sec-problems)] tracking-wider">Industry Challenge</span>
+            <p className="text-[var(--color-text-primary)] font-bold text-xs sm:text-sm">
               SaaSBOOMi report documents 35% surge in cloud GPU compute inference costs.
             </p>
           </div>
         </div>
-      </section>
-
-      {/* Main Filter Bar */}
-      <section>
-        <FilterBar />
       </section>
 
       {/* Real-time Verified News Feed */}

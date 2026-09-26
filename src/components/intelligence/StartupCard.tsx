@@ -15,7 +15,7 @@ export const StartupCard: React.FC<StartupCardProps> = memo(({ startup }) => {
   const [showTimeline, setShowTimeline] = useState(false);
 
   return (
-    <div className="liquid-glass-card p-5 space-y-4 select-none">
+    <div className="liquid-glass-card card-accent-top-startups p-5 space-y-4 select-none">
       {/* Header */}
       <div className="flex items-start justify-between gap-3">
         <div>

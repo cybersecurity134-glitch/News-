@@ -202,7 +202,7 @@ export const ImagePicker: React.FC<ImagePickerProps> = ({
                 type="button"
                 onClick={handleCapturePhoto}
                 disabled={isCompressing}
-                className="px-6 py-2 min-h-[44px] rounded-full bg-[var(--color-accent)] text-[#0B1F3A] text-xs font-bold hover:opacity-95 active:scale-[0.97] transition-all flex items-center gap-2"
+                className="px-6 py-2 min-h-[44px] rounded-full bg-[var(--color-accent)] text-[var(--color-accent-fg)] text-xs font-bold hover:opacity-95 active:scale-[0.97] transition-all flex items-center gap-2"
               >
                 {isCompressing ? (
                   <RefreshCw className="w-4 h-4 animate-spin" />

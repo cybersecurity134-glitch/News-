@@ -13,7 +13,7 @@ interface OpportunityCardProps {
 
 export const OpportunityCard: React.FC<OpportunityCardProps> = memo(({ opp }) => {
   return (
-    <div className="liquid-glass-card p-5 space-y-4 select-none">
+    <div className="liquid-glass-card card-accent-top-grants p-5 space-y-4 select-none">
       <div className="flex items-start justify-between gap-3">
         <div>
           <div className="flex items-center gap-2 mb-1 text-xs text-[var(--color-text-secondary)]">

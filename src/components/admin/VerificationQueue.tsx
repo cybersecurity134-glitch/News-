@@ -133,8 +133,8 @@ export const VerificationQueue: React.FC<VerificationQueueProps> = ({
 
           {/* Rejection input box if open */}
           {rejectingId === item.id && (
-            <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/20 space-y-2">
-              <label className="block text-caption font-semibold text-red-600 dark:text-red-400">
+            <div className="p-3 rounded-xl bg-[var(--color-error-bg)] border border-[var(--color-error-border)] space-y-2">
+              <label className="block text-caption font-semibold text-[var(--color-error-fg)]">
                 State reason for rejection (sent to contributor):
               </label>
               <input
@@ -142,7 +142,7 @@ export const VerificationQueue: React.FC<VerificationQueueProps> = ({
                 value={rejectReason}
                 onChange={(e) => setRejectReason(e.target.value)}
                 placeholder="e.g. Broken link, duplicated story, or unverified claims..."
-                className="w-full px-3 py-1.5 rounded-lg bg-white dark:bg-[#1C1C1E] border border-red-500/30 text-xs text-[var(--color-text-primary)] outline-none focus:ring-2 focus:ring-red-500"
+                className="w-full px-3 py-1.5 rounded-lg bg-[var(--color-surface-elevated)] border border-[var(--color-error-border)] text-xs text-[var(--color-text-primary)] outline-none focus:ring-2 focus:ring-[var(--color-error)]"
               />
               <div className="flex justify-end gap-2">
                 <button
@@ -157,7 +157,7 @@ export const VerificationQueue: React.FC<VerificationQueueProps> = ({
                 <button
                   disabled={!rejectReason.trim() || isProcessing}
                   onClick={() => handleReject(item)}
-                  className="px-3.5 py-1 rounded-lg bg-red-600 text-white text-xs font-semibold hover:bg-red-700 disabled:opacity-50"
+                  className="px-3.5 py-1 rounded-lg bg-[var(--color-error)] text-[var(--color-primary-fg)] text-xs font-semibold hover:opacity-90 disabled:opacity-50"
                 >
                   Confirm Rejection
                 </button>
@@ -171,7 +171,7 @@ export const VerificationQueue: React.FC<VerificationQueueProps> = ({
               <button
                 disabled={isProcessing}
                 onClick={() => setRejectingId(item.id)}
-                className="px-4 py-2 rounded-xl border border-red-500/30 text-red-600 dark:text-red-400 text-xs font-semibold hover:bg-red-500/10 flex items-center gap-1.5 transition-colors"
+                className="px-4 py-2 rounded-xl border border-[var(--color-error-border)] text-[var(--color-error-fg)] text-xs font-semibold hover:bg-[var(--color-error-bg)] flex items-center gap-1.5 transition-colors"
               >
                 <X className="w-3.5 h-3.5" />
                 <span>Reject</span>

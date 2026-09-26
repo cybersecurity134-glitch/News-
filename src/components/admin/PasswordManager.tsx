@@ -65,7 +65,7 @@ export const PasswordManager: React.FC = () => {
             Required by contributors to submit verified stories. Rotate periodically to maintain quality.
           </p>
         </div>
-        <KeyRound className="w-6 h-6 text-[#007AFF]" />
+        <KeyRound className="w-6 h-6 text-[var(--color-primary)]" />
       </div>
 
       {/* Active Code Display */}
@@ -74,7 +74,7 @@ export const PasswordManager: React.FC = () => {
           <span className="text-caption uppercase tracking-wider font-semibold text-[var(--color-text-secondary)] block">
             Current Active Passcode
           </span>
-          <span className="text-xl font-mono font-bold tracking-widest text-[#007AFF] dark:text-[#0A84FF]">
+          <span className="text-xl font-mono font-bold tracking-widest text-[var(--color-primary)]">
             {currentCode}
           </span>
         </div>
@@ -83,13 +83,13 @@ export const PasswordManager: React.FC = () => {
           onClick={handleCopy}
           className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-black/5 dark:bg-white/5 hover:bg-black/10 text-xs font-semibold text-[var(--color-text-primary)] transition-colors"
         >
-          {copied ? <CheckCircle2 className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
+          {copied ? <CheckCircle2 className="w-4 h-4 text-[var(--color-success)]" /> : <Copy className="w-4 h-4" />}
           <span>{copied ? 'Copied' : 'Copy'}</span>
         </button>
       </div>
 
       {statusMsg && (
-        <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs flex items-center gap-2">
+        <div className="p-3 rounded-xl bg-[var(--color-success-bg)] border border-[var(--color-success-border)] text-[var(--color-success-fg)] text-xs flex items-center gap-2">
           <CheckCircle2 className="w-4 h-4 shrink-0" />
           <span>{statusMsg}</span>
         </div>
@@ -102,13 +102,13 @@ export const PasswordManager: React.FC = () => {
           value={newCode}
           onChange={(e) => setNewCode(e.target.value)}
           placeholder="Enter new alphanumeric code (e.g. VENTURE42)"
-          className="flex-1 px-3.5 py-2.5 rounded-xl bg-black/5 dark:bg-white/5 border border-[var(--color-separator)] text-xs font-mono uppercase text-[var(--color-text-primary)] outline-none focus:ring-2 focus:ring-[#007AFF]"
+          className="flex-1 px-3.5 py-2.5 rounded-xl bg-black/5 dark:bg-white/5 border border-[var(--color-separator)] text-xs font-mono uppercase text-[var(--color-text-primary)] outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
         />
 
         <button
           type="submit"
           disabled={!newCode.trim() || newCode.trim().length < 4 || isUpdating}
-          className="px-5 py-2.5 rounded-xl bg-[#007AFF] hover:bg-[#0062CC] text-white text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors disabled:opacity-40 shadow-xs"
+          className="px-5 py-2.5 rounded-xl bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-[var(--color-primary-fg)] text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors disabled:opacity-40 shadow-xs"
         >
           <RefreshCw className={`w-3.5 h-3.5 ${isUpdating ? 'animate-spin' : ''}`} />
           <span>Rotate Passcode</span>
